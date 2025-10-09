@@ -62,7 +62,7 @@ export default function CheckoutInterface({
 }: CheckoutInterfaceProps) {
   const { state: cartState, removeItem } = useCart();
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('klarna');
-  const [shippingMethod, setShippingMethod] = useState('home');
+  const [shippingMethod, setShippingMethod] = useState('postnord');
   const [saveInfo, setSaveInfo] = useState(false);
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(true);
@@ -92,29 +92,38 @@ export default function CheckoutInterface({
 
   // Calculate totals from cart - VAT is already included in prices
   const subtotal = cartState.totalPrice; // VAT already included
-  const shipping = 69.00; // Fixed shipping cost - VAT already included
+  const shippingOptions = [
+    {
+      id: 'postnord',
+      name: 'PostNord - Pakke i postkassen',
+      description: '3-6 business days',
+      price: 69.00,
+      icon: '/images/shipping/logo-postnord-round-30.svg'
+    },
+    {
+      id: 'helthjem',
+      name: 'Helthjem - Hjemlevering',
+      description: '3-6 business days',
+      price: 82.00,
+      icon: '/images/shipping/helthjem.png'
+    },
+    {
+      id: 'posten',
+      name: 'Posten - Pakke i postkassen',
+      description: '3-6 business days',
+      price: 25.00,
+      icon: '/images/shipping/logo-posten-round-30.svg'
+    }
+  ];
+  
+  const selectedShippingOption = shippingOptions.find(option => option.id === shippingMethod) || shippingOptions[0];
+  const shipping = selectedShippingOption.price; // Dynamic shipping cost based on selection
   const total = subtotal + shipping; // Total with VAT included
   const vatRate = 0.25; // 25% VAT in Norway
   const vatAmount = total * vatRate / (1 + vatRate); // Extract VAT from total
   const subtotalExVat = subtotal / (1 + vatRate); // Subtotal excluding VAT
   const shippingExVat = shipping / (1 + vatRate); // Shipping excluding VAT
 
-  const shippingOptions = [
-    {
-      id: 'home',
-      name: 'Helthjem - Hjemlevering',
-      description: '3-6 business days',
-      price: 69.00,
-      icon: LocalShipping
-    },
-    {
-      id: 'post',
-      name: 'Posten - Pakke i postkassen',
-      description: '3-6 business days',
-      price: 79.00,
-      icon: LocalShipping
-    }
-  ];
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -130,11 +139,32 @@ export default function CheckoutInterface({
       ...formData,
       paymentMethod,
       shippingMethod,
+      shippingProvider: selectedShippingOption,
       saveInfo,
       orderItems: cartState.items,
       subtotal,
       shipping,
-      total
+      total,
+      vatAmount,
+      // Additional data for shipping API integration
+      customer: {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: email,
+        phone: formData.phone,
+        address: {
+          street: formData.address,
+          postalCode: formData.postalCode,
+          city: formData.city,
+          country: 'NO'
+        }
+      },
+      shipment: {
+        service: shippingMethod,
+        provider: selectedShippingOption.name,
+        price: shipping,
+        description: selectedShippingOption.description
+      }
     };
     onSubmit?.(checkoutData);
   };
@@ -250,7 +280,7 @@ export default function CheckoutInterface({
                     Shipping
                     <br />
                     <Typography component="span" variant="caption" color="text.secondary">
-                      Helthjem - Hjemlevering (3-6 business days)
+                      {selectedShippingOption.name} ({selectedShippingOption.description})
                     </Typography>
                   </Typography>
                   <Typography variant="body2">NOK {shipping.toFixed(2)}</Typography>
@@ -280,22 +310,115 @@ export default function CheckoutInterface({
       {/* Right Column - Checkout Form */}
       <Box sx={{ flex: { xs: '1', md: '0 0 55%' } }}>
 
-          {/* Email Field */}
-          <TextField
-            fullWidth
-            label="Email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="abu-bampoye@outlook.com"
-            variant="outlined"
-            sx={{ 
-              mb: 3,
-              '& .MuiOutlinedInput-root': {
-                borderRadius: '8px',
-              }
-            }}
-          />
+          {/* Contact Information */}
+          <Box sx={{ mb: 3 }}>
+            <Typography variant="h6" sx={{ mb: 2, fontWeight: 'bold' }}>
+              Contact Information
+            </Typography>
+            
+            <Stack spacing={2}>
+              <TextField
+                fullWidth
+                label="Email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="abu-bampoye@outlook.com"
+                variant="outlined"
+                sx={{ 
+                  '& .MuiOutlinedInput-root': {
+                    borderRadius: '8px',
+                  }
+                }}
+              />
+              
+              <Box sx={{ display: 'flex', gap: 2 }}>
+                <TextField
+                  label="Fornavn"
+                  value={formData.firstName}
+                  onChange={(e) => handleInputChange('firstName', e.target.value)}
+                  variant="outlined"
+                  sx={{ 
+                    flex: 1,
+                    '& .MuiOutlinedInput-root': {
+                      borderRadius: '8px',
+                    }
+                  }}
+                />
+                
+                <TextField
+                  label="Etternavn"
+                  value={formData.lastName}
+                  onChange={(e) => handleInputChange('lastName', e.target.value)}
+                  variant="outlined"
+                  sx={{ 
+                    flex: 1,
+                    '& .MuiOutlinedInput-root': {
+                      borderRadius: '8px',
+                    }
+                  }}
+                />
+              </Box>
+              
+              <TextField
+                fullWidth
+                label="Mobilnummer"
+                value={formData.phone}
+                onChange={(e) => handleInputChange('phone', e.target.value)}
+                placeholder="+47 123 45 678"
+                variant="outlined"
+                sx={{ 
+                  '& .MuiOutlinedInput-root': {
+                    borderRadius: '8px',
+                  }
+                }}
+              />
+              
+              <TextField
+                fullWidth
+                label="Adresse"
+                value={formData.address}
+                onChange={(e) => handleInputChange('address', e.target.value)}
+                placeholder="Gateadresse 123"
+                variant="outlined"
+                sx={{ 
+                  '& .MuiOutlinedInput-root': {
+                    borderRadius: '8px',
+                  }
+                }}
+              />
+              
+              <Box sx={{ display: 'flex', gap: 2 }}>
+                <TextField
+                  label="Postnummer"
+                  value={formData.postalCode}
+                  onChange={(e) => handleInputChange('postalCode', e.target.value)}
+                  placeholder="0123"
+                  variant="outlined"
+                  sx={{ 
+                    flex: 1,
+                    '& .MuiOutlinedInput-root': {
+                      borderRadius: '8px',
+                    }
+                  }}
+                />
+                
+                <TextField
+                  label="Poststed"
+                  value={formData.city}
+                  onChange={(e) => handleInputChange('city', e.target.value)}
+                  placeholder="Oslo"
+                  variant="outlined"
+                  sx={{ 
+                    flex: 2,
+                    '& .MuiOutlinedInput-root': {
+                      borderRadius: '8px',
+                    }
+                  }}
+                />
+              </Box>
+            </Stack>
+          </Box>
 
           {/* Shipping Method */}
           <Box sx={{ mb: 3 }}>
@@ -331,6 +454,27 @@ export default function CheckoutInterface({
                           label=""
                           sx={{ m: 0 }}
                         />
+                        <Box
+                          sx={{
+                            width: 40,
+                            height: 40,
+                            borderRadius: 1,
+                            background: 'white',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            border: '1px solid #e0e0e0',
+                            overflow: 'hidden',
+                          }}
+                        >
+                          <Image
+                            src={option.icon}
+                            alt={option.name}
+                            width={32}
+                            height={32}
+                            style={{ objectFit: 'contain' }}
+                          />
+                        </Box>
                         <Box sx={{ flex: 1 }}>
                           <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                             {option.name}
