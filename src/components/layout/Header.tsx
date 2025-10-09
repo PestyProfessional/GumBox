@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { AppBar, Toolbar, Typography, Button, Container, Box, IconButton, Drawer, List, ListItem, ListItemButton, ListItemText, useTheme, useMediaQuery } from '@mui/material';
-import { Menu as MenuIcon, Close as CloseIcon } from '@mui/icons-material';
+import { Menu as MenuIcon, Close as CloseIcon, ArrowBack } from '@mui/icons-material';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import ShoppingCart from '@/components/ui/ShoppingCart';
@@ -125,30 +125,46 @@ export default function Header() {
       >
         <Container maxWidth="lg">
           <Toolbar sx={{ display: 'flex', alignItems: 'center', py: 1.5, gap: 2 }}>
-            {/* Logo - Left */}
-            <Link href="/" style={{ textDecoration: 'none', outline: 'none' }} aria-label="GumBox hjem">
-              <Typography 
-                variant="h5" 
-                component="div" 
-                sx={{ 
-                  fontWeight: 'bold',
-                  background: 'linear-gradient(135deg, #F94F9B 0%, #2E8BFF 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease',
-                  outline: 'none',
-                  '&:focus': {
+            {/* Logo - Left with conditional back arrow */}
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              {pathname === '/checkout' && (
+                <IconButton
+                  onClick={() => router.push('/')}
+                  aria-label="Tilbake til forsiden"
+                  sx={{
+                    color: 'text.primary',
+                    '&:hover': {
+                      backgroundColor: 'rgba(249, 79, 155, 0.08)',
+                    }
+                  }}
+                >
+                  <ArrowBack />
+                </IconButton>
+              )}
+              <Link href="/" style={{ textDecoration: 'none', outline: 'none' }} aria-label="GumBox hjem">
+                <Typography 
+                  variant="h5" 
+                  component="div" 
+                  sx={{ 
+                    fontWeight: 'bold',
+                    background: 'linear-gradient(135deg, #F94F9B 0%, #2E8BFF 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease',
                     outline: 'none',
-                  },
-                  '&:active': {
-                    outline: 'none',
-                  }
-                }}
-              >
-                GumBox
-              </Typography>
-            </Link>
+                    '&:focus': {
+                      outline: 'none',
+                    },
+                    '&:active': {
+                      outline: 'none',
+                    }
+                  }}
+                >
+                  GumBox
+                </Typography>
+              </Link>
+            </Box>
 
             {/* Desktop Navigation - Center */}
             {!isMobile && (
