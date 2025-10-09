@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+Disallow: /checkout/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /private/
+
+# Specific crawlers
+User-agent: Googlebot
+Allow: /
+Disallow: /checkout/
+Disallow: /api/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /checkout/
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://gumbox.no/sitemap.xml
