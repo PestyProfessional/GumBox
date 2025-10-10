@@ -171,10 +171,12 @@ export default function CheckoutInterface({
 
   const handleRemoveItem = (itemId: string) => {
     removeItem(itemId);
-    // If cart becomes empty, redirect to main page
-    if (cartState.items.length === 1) {
-      window.location.href = '/';
-    }
+    // If cart becomes empty, redirect to main page after a small delay to allow state update
+    setTimeout(() => {
+      if (cartState.items.length === 0) {
+        window.location.href = '/';
+      }
+    }, 100);
   };
 
   // Show loading state while cart is being loaded

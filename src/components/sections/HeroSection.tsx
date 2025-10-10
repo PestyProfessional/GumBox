@@ -14,41 +14,24 @@ export default function HeroSection() {
   return (
     <Box
       sx={{
-        minHeight: { xs: '70vh', sm: '80vh', md: '85vh', lg: '90vh' },
-        maxHeight: { xs: '90vh', sm: '95vh', md: '100vh' },
+        height: '100vh',
+        backgroundImage: 'url(/images/ComputerHeroImageGul.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center center',
+        backgroundRepeat: 'no-repeat',
         position: 'relative',
-        overflow: 'hidden',
         display: 'flex',
-        alignItems: 'flex-start',
+        alignItems: 'flex-end',
         justifyContent: 'flex-start',
-        py: { xs: 6, sm: 8, md: 10, lg: 12 },
+        p: 4,
+        backgroundColor: '#fff',
       }}
     >
-      {/* Optimized background image */}
-      <Image
-        src="/images/gumbox-2.png"
-        alt="GumBox background - colorful chewing gum collection"
-        fill
-        sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, (max-width: 1440px) 100vw, 100vw"
-        style={{
-          objectFit: 'cover',
-          objectPosition: 'center',
-          zIndex: -1,
-        }}
-        priority
-        quality={80}
-      />
       {/* Start Abonnement Button - Bottom Left Corner */}
       <MotionBox
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        sx={{
-          position: 'absolute',
-          bottom: { xs: '3%', sm: '4%', md: '5%', lg: '6%' },
-          left: { xs: '3%', sm: '4%', md: '5%', lg: '6%' },
-          zIndex: 1,
-        }}
       >
         <MotionButton
           variant="contained"

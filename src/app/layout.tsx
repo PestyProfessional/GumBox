@@ -4,6 +4,10 @@ import ThemeProviderWrapper from '@/components/layout/ThemeProviderWrapper';
 import { CartProvider } from '@/contexts/CartContext';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import CookieConsent from '@/components/CookieConsent';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
+import FacebookPixel from '@/components/FacebookPixel';
+import Hotjar from '@/components/Hotjar';
 import './globals.css';
 
 const rubik = Rubik({
@@ -46,7 +50,7 @@ export const metadata: Metadata = {
     alternateLocale: ['en_US', 'da_DK', 'sv_SE'],
     images: [
       {
-        url: '/images/gumbox-2.png',
+        url: '/images/ComputerHeroImageGul.png',
         width: 1200,
         height: 630,
         alt: 'GumBox - Eksotiske tyggegummi fra hele verden',
@@ -70,7 +74,7 @@ export const metadata: Metadata = {
     description: 'Opplev eksotiske smaker fra hele verden med GumBox. Kurerte tyggegummi levert månedlig. 🍬',
     images: [
       {
-        url: '/images/gumbox-2.png',
+        url: '/images/ComputerHeroImageGul.png',
         alt: 'GumBox - Eksotiske tyggegummi fra hele verden',
         width: 1200,
         height: 630,
@@ -141,6 +145,9 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/images/BlaaPerf.png" />
       </head>
       <body className={`${rubik.variable}`} style={{ fontFamily: 'var(--font-rubik), sans-serif' }}>
+        <GoogleAnalytics />
+        <FacebookPixel />
+        <Hotjar />
         <ThemeProviderWrapper>
           <CartProvider>
             <Header />
@@ -148,6 +155,7 @@ export default function RootLayout({
               {children}
             </main>
             <Footer />
+            <CookieConsent />
           </CartProvider>
         </ThemeProviderWrapper>
       </body>

@@ -47,11 +47,27 @@ export default function Footer() {
                 onClick={handleAbonnementClick}
                 color="inherit" 
                 underline="hover"
-                sx={{ cursor: 'pointer' }}
+                sx={{ 
+                  cursor: 'pointer',
+                  '&:focus': {
+                    outline: 'none',
+                    textDecoration: 'underline'
+                  }
+                }}
               >
                 Abonnement
               </Link>
-              <Link href="/om-oss" color="inherit" underline="hover">
+              <Link 
+                href="/om-oss" 
+                color="inherit" 
+                underline="hover"
+                sx={{
+                  '&:focus': {
+                    outline: 'none',
+                    textDecoration: 'underline'
+                  }
+                }}
+              >
                 Om Oss
               </Link>
             </Box>
@@ -63,13 +79,43 @@ export default function Footer() {
               Kundeservice
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-              <Link href="#" color="inherit" underline="hover">
+              <Link 
+                href="#" 
+                color="inherit" 
+                underline="hover"
+                sx={{
+                  '&:focus': {
+                    outline: 'none',
+                    textDecoration: 'underline'
+                  }
+                }}
+              >
                 FAQ
               </Link>
-              <Link href="#" color="inherit" underline="hover">
+              <Link 
+                href="#" 
+                color="inherit" 
+                underline="hover"
+                sx={{
+                  '&:focus': {
+                    outline: 'none',
+                    textDecoration: 'underline'
+                  }
+                }}
+              >
                 Kontakt
               </Link>
-              <Link href="#" color="inherit" underline="hover">
+              <Link 
+                href="#" 
+                color="inherit" 
+                underline="hover"
+                sx={{
+                  '&:focus': {
+                    outline: 'none',
+                    textDecoration: 'underline'
+                  }
+                }}
+              >
                 Frakt & Retur
               </Link>
             </Box>
@@ -81,11 +127,44 @@ export default function Footer() {
               Juridisk
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-              <Link href="#" color="inherit" underline="hover">
+              <Link 
+                href="#" 
+                color="inherit" 
+                underline="hover"
+                sx={{
+                  '&:focus': {
+                    outline: 'none',
+                    textDecoration: 'underline'
+                  }
+                }}
+              >
                 Personvern
               </Link>
-              <Link href="#" color="inherit" underline="hover">
+              <Link 
+                href="#" 
+                color="inherit" 
+                underline="hover"
+                sx={{
+                  '&:focus': {
+                    outline: 'none',
+                    textDecoration: 'underline'
+                  }
+                }}
+              >
                 Vilkår
+              </Link>
+              <Link 
+                href="/cookies" 
+                color="inherit" 
+                underline="hover"
+                sx={{
+                  '&:focus': {
+                    outline: 'none',
+                    textDecoration: 'underline'
+                  }
+                }}
+              >
+                Informasjonskapsler
               </Link>
             </Box>
           </Box>
@@ -99,7 +178,7 @@ export default function Footer() {
               post@gumbox.no
             </Typography>
             <Typography variant="body2">
-              +47 123 45 678
+              +47 979 57 676
             </Typography>
           </Box>
         </Box>
