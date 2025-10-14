@@ -1,299 +1,409 @@
 'use client';
 
-import { Box, Container, Typography, Paper } from '@mui/material';
+import { 
+  Box, 
+  Container, 
+  Typography, 
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails
+} from '@mui/material';
+import { useRouter } from 'next/navigation';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useState } from 'react';
 
-export default function CookiePolicyPage() {
+interface CookieInfo {
+  name: string;
+  purpose: string;
+  provider: string;
+  duration: string;
+  type: 'necessary' | 'analytics' | 'marketing';
+}
+
+export default function CookiesPage() {
+  const router = useRouter();
+  const [expanded, setExpanded] = useState<string | false>(false);
+
+  const handleChange = (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
+  const cookiesData: CookieInfo[] = [
+    // Necessary Cookies
+    {
+      name: 'consent_preferences',
+      purpose: 'Lagrer dine valg for informasjonskapsler',
+      provider: 'GumBox',
+      duration: '1 år',
+      type: 'necessary'
+    },
+    {
+      name: 'cart_session',
+      purpose: 'Husker produkter i handlekurven din',
+      provider: 'GumBox',
+      duration: 'Økt (session)',
+      type: 'necessary'
+    },
+    
+    // Analytics Cookies
+    {
+      name: '_ga',
+      purpose: 'Skiller mellom brukere for Google Analytics',
+      provider: 'Google Analytics',
+      duration: '2 år',
+      type: 'analytics'
+    },
+    {
+      name: '_ga_*',
+      purpose: 'Brukes til å beregne besøksdata for Google Analytics',
+      provider: 'Google Analytics',
+      duration: '2 år',
+      type: 'analytics'
+    },
+    {
+      name: 'CLID',
+      purpose: 'Microsoft Clarity brukeridentifikator',
+      provider: 'Microsoft Clarity',
+      duration: '1 år',
+      type: 'analytics'
+    },
+    {
+      name: '_clck',
+      purpose: 'Microsoft Clarity session tracking',
+      provider: 'Microsoft Clarity',
+      duration: '1 år',
+      type: 'analytics'
+    },
+    {
+      name: '_clsk',
+      purpose: 'Microsoft Clarity session tracking',
+      provider: 'Microsoft Clarity',
+      duration: '1 dag',
+      type: 'analytics'
+    },
+    {
+      name: 'ANONCHK',
+      purpose: 'Microsoft Clarity brukes til å sjekke om cookies er aktivert',
+      provider: 'Microsoft Clarity',
+      duration: '10 minutter',
+      type: 'analytics'
+    },
+    {
+      name: 'MR',
+      purpose: 'Microsoft Clarity brukes til å indikere om bruker har valgt bort tracking',
+      provider: 'Microsoft Clarity',
+      duration: '7 dager',
+      type: 'analytics'
+    },
+    {
+      name: 'SM',
+      purpose: 'Microsoft Clarity synkronisering av bruker-ID på tvers av domener',
+      provider: 'Microsoft Clarity',
+      duration: 'Økt (session)',
+      type: 'analytics'
+    },
+
+    // Marketing Cookies
+    {
+      name: '_gcl_au',
+      purpose: 'Google Ads konverteringssporing',
+      provider: 'Google Ads',
+      duration: '90 dager',
+      type: 'marketing'
+    },
+    {
+      name: 'ADS_VISITOR_ID',
+      purpose: 'Google Ads brukeridentifikator for annonsemåling',
+      provider: 'Google Ads',
+      duration: '2 år',
+      type: 'marketing'
+    },
+    {
+      name: '_fbp',
+      purpose: 'Facebook Pixel sporing',
+      provider: 'Facebook',
+      duration: '90 dager',
+      type: 'marketing'
+    },
+    {
+      name: '_hjSessionUser_*',
+      purpose: 'Hotjar brukeridentifikator',
+      provider: 'Hotjar',
+      duration: '1 år',
+      type: 'analytics'
+    },
+    {
+      name: '_hjSession_*',
+      purpose: 'Hotjar økt tracking',
+      provider: 'Hotjar',
+      duration: '30 minutter',
+      type: 'analytics'
+    }
+  ];
+
+  const groupedCookies = cookiesData.reduce((acc, cookie) => {
+    if (!acc[cookie.type]) {
+      acc[cookie.type] = [];
+    }
+    acc[cookie.type].push(cookie);
+    return acc;
+  }, {} as Record<string, CookieInfo[]>);
+
+  const categoryNames = {
+    necessary: 'Nødvendige informasjonskapsler',
+    analytics: 'Analyse og statistikk',
+    marketing: 'Markedsføring og annonsering'
+  };
+
+  const categoryDescriptions = {
+    necessary: 'Disse informasjonskapslene er nødvendige for at nettstedet skal fungere og kan ikke slås av i våre systemer.',
+    analytics: 'Disse informasjonskapslene hjelper oss å forstå hvordan besøkende samhandler med nettstedet vårt ved å samle inn og rapportere informasjon anonymt.',
+    marketing: 'Disse informasjonskapslene brukes til å levere annonser som er mer relevante for deg og dine interesser.'
+  };
+
   return (
-    <Box sx={{ py: 8, mt: 4 }}>
-      <Container maxWidth="md">
-        <Paper sx={{ p: 4, borderRadius: 2, boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)' }}>
-          <Typography variant="h3" component="h1" gutterBottom sx={{ mb: 4, fontWeight: 600, color: '#333' }}>
-            Informasjonskapsler (Cookies)
-          </Typography>
+    <Container maxWidth="lg" sx={{ py: 8 }}>
+      {/* Header */}
+      <Box sx={{ mb: 4 }}>
+        <Button
+          startIcon={<ArrowBackIcon />}
+          onClick={() => router.back()}
+          sx={{ 
+            mb: 2,
+            color: 'text.secondary',
+            '&:hover': {
+              backgroundColor: 'rgba(0, 0, 0, 0.04)'
+            }
+          }}
+        >
+          Tilbake
+        </Button>
+        
+        <Typography variant="h3" component="h1" sx={{ mb: 2, fontWeight: 700 }}>
+          Informasjonskapsler (Cookies)
+        </Typography>
+        
+        <Typography variant="body1" color="text.secondary" sx={{ mb: 4, lineHeight: 1.6 }}>
+          Denne siden forklarer hvordan GumBox bruker informasjonskapsler og lignende teknologier 
+          for å gjenkjenne deg når du besøker nettstedet vårt. Den forklarer hva disse teknologiene 
+          er og hvorfor vi bruker dem, samt dine rettigheter til å kontrollere bruken av dem.
+        </Typography>
+      </Box>
 
-          <Typography variant="body1" paragraph sx={{ mb: 3, lineHeight: 1.7 }}>
-            Denne siden forklarer hvordan GumBox bruker informasjonskapsler (cookies) på vår nettside gumbox.no.
-          </Typography>
+      {/* What are cookies */}
+      <Box sx={{ mb: 6 }}>
+        <Typography variant="h4" sx={{ mb: 3, fontWeight: 600 }}>
+          Hva er informasjonskapsler?
+        </Typography>
+        <Typography variant="body1" sx={{ mb: 2, lineHeight: 1.6 }}>
+          Informasjonskapsler er små tekstfiler som plasseres på datamaskinen eller mobilenheten din 
+          når du besøker et nettsted. De brukes mye av nettsteder for å gjøre dem mer effektive, 
+          samt å gi informasjon til eierne av nettstedet.
+        </Typography>
+        <Typography variant="body1" sx={{ lineHeight: 1.6 }}>
+          Vi bruker informasjonskapsler for å forbedre din opplevelse på nettstedet vårt, 
+          forstå hvordan du bruker tjenestene våre, og levere personalisert innhold og annonser.
+        </Typography>
+      </Box>
 
-          <Typography variant="h5" component="h2" gutterBottom sx={{ mt: 4, mb: 2, fontWeight: 600, color: '#444' }}>
-            Hva er informasjonskapsler?
-          </Typography>
-          <Typography variant="body1" paragraph sx={{ mb: 3, lineHeight: 1.7 }}>
-            Informasjonskapsler er små tekstfiler som lagres på din enhet når du besøker en nettside. 
-            De brukes til å huske dine preferanser og forbedre din opplevelse på nettsiden.
-          </Typography>
-
-          <Typography variant="h5" component="h2" gutterBottom sx={{ mt: 4, mb: 2, fontWeight: 600, color: '#444' }}>
-            Hvilke informasjonskapsler bruker vi?
-          </Typography>
-          <Typography variant="body1" paragraph sx={{ mb: 3, lineHeight: 1.7 }}>
-            Vi bruker både nødvendige og valgfrie informasjonskapsler for å forbedre din opplevelse på nettsiden. 
-            Tabellene nedenfor viser en oversikt over våre informasjonskapsler:
-          </Typography>
-
-          <Typography variant="h6" component="h3" gutterBottom sx={{ mt: 3, mb: 2, fontWeight: 600, color: '#555' }}>
-            Nødvendige informasjonskapsler
-          </Typography>
-          <Typography variant="body1" paragraph sx={{ mb: 3, lineHeight: 1.7 }}>
-            Disse informasjonskapslene er nødvendige for at nettsiden skal fungere korrekt og kan ikke deaktiveres:
-          </Typography>
-          
-          <Box sx={{ overflowX: 'auto', mb: 4 }}>
-            <Box component="table" sx={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.875rem' }}>
-              <Box component="thead">
-                <Box component="tr" sx={{ backgroundColor: '#F7F7F7' }}>
-                  <Box component="th" sx={{ p: 2, textAlign: 'left', fontWeight: 600, border: '1px solid #E0E0E0' }}>Navn</Box>
-                  <Box component="th" sx={{ p: 2, textAlign: 'left', fontWeight: 600, border: '1px solid #E0E0E0' }}>Type</Box>
-                  <Box component="th" sx={{ p: 2, textAlign: 'left', fontWeight: 600, border: '1px solid #E0E0E0' }}>Leverandør</Box>
-                  <Box component="th" sx={{ p: 2, textAlign: 'left', fontWeight: 600, border: '1px solid #E0E0E0' }}>Utløp</Box>
-                  <Box component="th" sx={{ p: 2, textAlign: 'left', fontWeight: 600, border: '1px solid #E0E0E0' }}>Formål</Box>
-                </Box>
+      {/* Types of cookies */}
+      <Box sx={{ mb: 6 }}>
+        <Typography variant="h4" sx={{ mb: 3, fontWeight: 600 }}>
+          Typer informasjonskapsler vi bruker
+        </Typography>
+        
+        {Object.entries(groupedCookies).map(([type, cookies]) => (
+          <Accordion
+            key={type}
+            expanded={expanded === type}
+            onChange={handleChange(type)}
+            sx={{ mb: 2, '&:before': { display: 'none' } }}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              sx={{ 
+                backgroundColor: 'grey.50',
+                '& .MuiAccordionSummary-content': {
+                  margin: '16px 0',
+                }
+              }}
+            >
+              <Box>
+                <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                  {categoryNames[type as keyof typeof categoryNames]} ({cookies.length})
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {categoryDescriptions[type as keyof typeof categoryDescriptions]}
+                </Typography>
               </Box>
-              <Box component="tbody">
-                <Box component="tr">
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0', fontFamily: 'monospace' }}>__stripe_mid</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Tredjeparts HTTP</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>stripe.com</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>1 år</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Brukes for å gjennomføre sikre kredittkortbetalinger. Stripe er vår betalingsleverandør.</Box>
-                </Box>
-                <Box component="tr" sx={{ backgroundColor: '#FAFAFA' }}>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0', fontFamily: 'monospace' }}>__stripe_sid</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Tredjeparts HTTP</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>stripe.com</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>1 dag</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Brukes for å gjennomføre sikre kredittkortbetalinger. Stripe er vår betalingsleverandør.</Box>
-                </Box>
-                <Box component="tr">
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0', fontFamily: 'monospace' }}>gumbox_session</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Førsteparts HTTP</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>GumBox</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Økt</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Nødvendig for sikker pålogging og oppbevaring av handlekurv.</Box>
-                </Box>
-                <Box component="tr" sx={{ backgroundColor: '#FAFAFA' }}>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0', fontFamily: 'monospace' }}>gumbox-cookie-consent</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Førsteparts HTML</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>GumBox</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Permanent</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Husker dine cookie-preferanser for å unngå gjentatte forespørsler.</Box>
-                </Box>
-              </Box>
-            </Box>
-          </Box>
+            </AccordionSummary>
+            <AccordionDetails sx={{ p: 0 }}>
+              <TableContainer>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell><strong>Navn</strong></TableCell>
+                      <TableCell><strong>Formål</strong></TableCell>
+                      <TableCell><strong>Leverandør</strong></TableCell>
+                      <TableCell><strong>Varighet</strong></TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {cookies.map((cookie, index) => (
+                      <TableRow key={index}>
+                        <TableCell sx={{ fontFamily: 'monospace', fontSize: '0.875rem' }}>
+                          {cookie.name}
+                        </TableCell>
+                        <TableCell>{cookie.purpose}</TableCell>
+                        <TableCell>{cookie.provider}</TableCell>
+                        <TableCell>{cookie.duration}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </AccordionDetails>
+          </Accordion>
+        ))}
+      </Box>
 
-          <Typography variant="h6" component="h3" gutterBottom sx={{ mt: 4, mb: 2, fontWeight: 600, color: '#555' }}>
-            Analytiske informasjonskapsler (valgfri)
+      {/* Third party services */}
+      <Box sx={{ mb: 6 }}>
+        <Typography variant="h4" sx={{ mb: 3, fontWeight: 600 }}>
+          Tredjeparts tjenester
+        </Typography>
+        
+        <Box sx={{ mb: 4 }}>
+          <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
+            Google Analytics & Google Ads
           </Typography>
-          <Typography variant="body1" paragraph sx={{ mb: 3, lineHeight: 1.7 }}>
-            Disse informasjonskapslene hjelper oss å forstå hvordan besøkende bruker nettsiden. Du kan velge å godta eller avslå disse:
+          <Typography variant="body1" sx={{ mb: 2, lineHeight: 1.6 }}>
+            Vi bruker Google Analytics for å forstå hvordan besøkende bruker nettstedet vårt, 
+            og Google Ads for å spore konverteringer og optimalisere våre annonsekampanjer.
           </Typography>
-          
-          <Box sx={{ overflowX: 'auto', mb: 4 }}>
-            <Box component="table" sx={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.875rem' }}>
-              <Box component="thead">
-                <Box component="tr" sx={{ backgroundColor: '#F7F7F7' }}>
-                  <Box component="th" sx={{ p: 2, textAlign: 'left', fontWeight: 600, border: '1px solid #E0E0E0' }}>Navn</Box>
-                  <Box component="th" sx={{ p: 2, textAlign: 'left', fontWeight: 600, border: '1px solid #E0E0E0' }}>Type</Box>
-                  <Box component="th" sx={{ p: 2, textAlign: 'left', fontWeight: 600, border: '1px solid #E0E0E0' }}>Leverandør</Box>
-                  <Box component="th" sx={{ p: 2, textAlign: 'left', fontWeight: 600, border: '1px solid #E0E0E0' }}>Utløp</Box>
-                  <Box component="th" sx={{ p: 2, textAlign: 'left', fontWeight: 600, border: '1px solid #E0E0E0' }}>Formål</Box>
-                </Box>
-              </Box>
-              <Box component="tbody">
-                <Box component="tr">
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0', fontFamily: 'monospace' }}>_ga</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Tredjeparts HTTP</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>google.com</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>2 år</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Sett en unik ID for å generere statistiske data om hvordan du bruker GumBox.</Box>
-                </Box>
-                <Box component="tr" sx={{ backgroundColor: '#FAFAFA' }}>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0', fontFamily: 'monospace' }}>_gat</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Tredjeparts HTTP</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>google.com</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>1 dag</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Brukes av Google Analytics til å begrense forespørselsraten.</Box>
-                </Box>
-                <Box component="tr">
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0', fontFamily: 'monospace' }}>_gid</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Tredjeparts HTTP</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>google.com</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>1 dag</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Sett en unik ID for å generere statistiske data om hvordan du bruker GumBox.</Box>
-                </Box>
-                <Box component="tr" sx={{ backgroundColor: '#FAFAFA' }}>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0', fontFamily: 'monospace' }}>collect</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Tredjeparts pixel</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>google.com</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Økt</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Send data til Google Analytics om enheten din og brukeratferd.</Box>
-                </Box>
-              </Box>
-            </Box>
-          </Box>
+          <Typography variant="body2" color="text.secondary">
+            Les mer om Googles personvernerklæring:{' '}
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
+              https://policies.google.com/privacy
+            </a>
+          </Typography>
+        </Box>
 
-          <Typography variant="h6" component="h3" gutterBottom sx={{ mt: 4, mb: 2, fontWeight: 600, color: '#555' }}>
-            Markedsføringsinformasjonskapsler (valgfri)
+        <Box sx={{ mb: 4 }}>
+          <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
+            Microsoft Clarity
           </Typography>
-          <Typography variant="body1" paragraph sx={{ mb: 3, lineHeight: 1.7 }}>
-            Disse informasjonskapslene brukes til å vise deg relevante annonser og tilbud. Du kan velge å godta eller avslå disse:
+          <Typography variant="body1" sx={{ mb: 2, lineHeight: 1.6 }}>
+            Microsoft Clarity hjelper oss å forstå hvordan brukere samhandler med nettstedet vårt 
+            gjennom funksjoner som heatmaps og økt-opptak. All data er anonymisert.
           </Typography>
-          
-          <Box sx={{ overflowX: 'auto', mb: 4 }}>
-            <Box component="table" sx={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.875rem' }}>
-              <Box component="thead">
-                <Box component="tr" sx={{ backgroundColor: '#F7F7F7' }}>
-                  <Box component="th" sx={{ p: 2, textAlign: 'left', fontWeight: 600, border: '1px solid #E0E0E0' }}>Navn</Box>
-                  <Box component="th" sx={{ p: 2, textAlign: 'left', fontWeight: 600, border: '1px solid #E0E0E0' }}>Type</Box>
-                  <Box component="th" sx={{ p: 2, textAlign: 'left', fontWeight: 600, border: '1px solid #E0E0E0' }}>Leverandør</Box>
-                  <Box component="th" sx={{ p: 2, textAlign: 'left', fontWeight: 600, border: '1px solid #E0E0E0' }}>Utløp</Box>
-                  <Box component="th" sx={{ p: 2, textAlign: 'left', fontWeight: 600, border: '1px solid #E0E0E0' }}>Formål</Box>
-                </Box>
-              </Box>
-              <Box component="tbody">
-                <Box component="tr">
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0', fontFamily: 'monospace' }}>_fbp</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Tredjeparts HTTP</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>facebook.com</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>3 måneder</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Brukes av Facebook til å levere målrettede annonser og måle annonsenes effektivitet.</Box>
-                </Box>
-                <Box component="tr" sx={{ backgroundColor: '#FAFAFA' }}>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0', fontFamily: 'monospace' }}>fr</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Tredjeparts HTTP</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>facebook.com</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>3 måneder</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Brukes av Facebook til å levere målrettede annonser basert på brukeratferd.</Box>
-                </Box>
-                <Box component="tr">
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0', fontFamily: 'monospace' }}>tr</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Tredjeparts pixel</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>facebook.com</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Økt</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Sporer konverteringer og brukeratferd for Facebook-annonser.</Box>
-                </Box>
-              </Box>
-            </Box>
-          </Box>
+          <Typography variant="body2" color="text.secondary">
+            Les mer om Microsoft Clarity:{' '}
+            <a href="https://clarity.microsoft.com/terms" target="_blank" rel="noopener noreferrer">
+              https://clarity.microsoft.com/terms
+            </a>
+          </Typography>
+        </Box>
 
-          <Typography variant="h6" component="h3" gutterBottom sx={{ mt: 4, mb: 2, fontWeight: 600, color: '#555' }}>
-            Brukeropplevelse og analyse (valgfri)
+        <Box sx={{ mb: 4 }}>
+          <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
+            Facebook Pixel
           </Typography>
-          <Typography variant="body1" paragraph sx={{ mb: 3, lineHeight: 1.7 }}>
-            Disse tjenestene hjelper oss å forstå hvordan du bruker nettsiden og forbedre opplevelsen:
+          <Typography variant="body1" sx={{ mb: 2, lineHeight: 1.6 }}>
+            Facebook Pixel hjelper oss å måle effektiviteten av våre annonser på Facebook og Instagram, 
+            og levere mer relevante annonser til brukere.
           </Typography>
-          
-          <Box sx={{ overflowX: 'auto', mb: 4 }}>
-            <Box component="table" sx={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.875rem' }}>
-              <Box component="thead">
-                <Box component="tr" sx={{ backgroundColor: '#F7F7F7' }}>
-                  <Box component="th" sx={{ p: 2, textAlign: 'left', fontWeight: 600, border: '1px solid #E0E0E0' }}>Navn</Box>
-                  <Box component="th" sx={{ p: 2, textAlign: 'left', fontWeight: 600, border: '1px solid #E0E0E0' }}>Type</Box>
-                  <Box component="th" sx={{ p: 2, textAlign: 'left', fontWeight: 600, border: '1px solid #E0E0E0' }}>Leverandør</Box>
-                  <Box component="th" sx={{ p: 2, textAlign: 'left', fontWeight: 600, border: '1px solid #E0E0E0' }}>Utløp</Box>
-                  <Box component="th" sx={{ p: 2, textAlign: 'left', fontWeight: 600, border: '1px solid #E0E0E0' }}>Formål</Box>
-                </Box>
-              </Box>
-              <Box component="tbody">
-                <Box component="tr">
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0', fontFamily: 'monospace' }}>_hjid</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Tredjeparts HTTP</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>hotjar.com</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>1 år</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Sett en unik ID for å forstå brukeratferd gjennom heatmaps og session recordings.</Box>
-                </Box>
-                <Box component="tr" sx={{ backgroundColor: '#FAFAFA' }}>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0', fontFamily: 'monospace' }}>_hjIncludedInSample</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Tredjeparts HTTP</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>hotjar.com</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Økt</Box>
-                  <Box component="td" sx={{ p: 2, border: '1px solid #E0E0E0' }}>Bestemmer om brukerens navigasjon skal registreres for Hotjar-analyse.</Box>
-                </Box>
-              </Box>
-            </Box>
-          </Box>
+          <Typography variant="body2" color="text.secondary">
+            Les mer om Facebook Data Policy:{' '}
+            <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener noreferrer">
+              https://www.facebook.com/privacy/policy/
+            </a>
+          </Typography>
+        </Box>
 
-          <Typography variant="h5" component="h2" gutterBottom sx={{ mt: 4, mb: 2, fontWeight: 600, color: '#444' }}>
-            Fremtidige utvidelser
+        <Box sx={{ mb: 4 }}>
+          <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
+            Hotjar
           </Typography>
-          <Typography variant="body1" paragraph sx={{ mb: 3, lineHeight: 1.7 }}>
-            Vi vurderer å implementere følgende tilleggstjenester i fremtiden:
+          <Typography variant="body1" sx={{ mb: 2, lineHeight: 1.6 }}>
+            Hotjar gir oss innsikt i brukeropplevelsen gjennom heatmaps, opptak av brukerøkter 
+            og tilbakemeldingsverktøy. Dette hjelper oss å forbedre nettstedet vårt.
           </Typography>
-          <Box component="ul" sx={{ mb: 3, pl: 3 }}>
-            <Typography component="li" variant="body1" sx={{ mb: 1 }}>
-              <strong>Google Ads:</strong> For utvidet produktmarkedsføring og retargeting
-            </Typography>
-            <Typography component="li" variant="body1" sx={{ mb: 1 }}>
-              <strong>Microsoft Clarity:</strong> For ytterligere brukeropplevelsesanalyse
-            </Typography>
-          </Box>
+          <Typography variant="body2" color="text.secondary">
+            Les mer om Hotjars personvernerklæring:{' '}
+            <a href="https://www.hotjar.com/legal/policies/privacy/" target="_blank" rel="noopener noreferrer">
+              https://www.hotjar.com/legal/policies/privacy/
+            </a>
+          </Typography>
+        </Box>
+      </Box>
 
-          <Typography variant="body1" paragraph sx={{ mb: 3, lineHeight: 1.7, fontStyle: 'italic', color: '#666' }}>
-            Før vi implementerer disse tjenestene, vil du få mulighet til å velge om du ønsker å delta eller ikke.
-          </Typography>
+      {/* How to control cookies */}
+      <Box sx={{ mb: 6 }}>
+        <Typography variant="h4" sx={{ mb: 3, fontWeight: 600 }}>
+          Hvordan kontrollere informasjonskapsler
+        </Typography>
+        
+        <Typography variant="body1" sx={{ mb: 3, lineHeight: 1.6 }}>
+          Du kan kontrollere og/eller slette informasjonskapsler etter eget ønske. Du kan slette 
+          alle informasjonskapsler som allerede er på datamaskinen din, og du kan stille inn de 
+          fleste nettlesere til å forhindre at de blir plassert.
+        </Typography>
 
-          <Typography variant="h5" component="h2" gutterBottom sx={{ mt: 4, mb: 2, fontWeight: 600, color: '#444' }}>
-            Hvordan kontrollere informasjonskapsler
-          </Typography>
-          <Typography variant="body1" paragraph sx={{ mb: 3, lineHeight: 1.7 }}>
-            Du kan kontrollere og administrere informasjonskapsler på flere måter:
-          </Typography>
+        <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
+          Gjennom vårt samtykkebanners
+        </Typography>
+        <Typography variant="body1" sx={{ mb: 3, lineHeight: 1.6 }}>
+          Du kan når som helst endre dine valg ved å klikke på "Administrer alternativer" 
+          i vårt samtykkebanners som vises nederst på siden.
+        </Typography>
 
-          <Typography variant="h6" component="h3" gutterBottom sx={{ mt: 3, mb: 1, fontWeight: 600, color: '#555' }}>
-            Nettleserinnstillinger
-          </Typography>
-          <Typography variant="body1" paragraph sx={{ mb: 2, lineHeight: 1.7 }}>
-            De fleste nettlesere lar deg kontrollere informasjonskapsler gjennom innstillingene. 
-            Du kan vanligvis finne disse innstillingene i "Personvern" eller "Sikkerhet" seksjonen i nettleseren din.
-          </Typography>
+        <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
+          Gjennom nettleserinnstillinger
+        </Typography>
+        <Typography variant="body1" sx={{ mb: 2, lineHeight: 1.6 }}>
+          De fleste nettlesere lar deg:
+        </Typography>
+        <Box component="ul" sx={{ pl: 3, mb: 3 }}>
+          <li>Se hvilke informasjonskapsler du har og slette dem individuelt</li>
+          <li>Blokkere tredjepartskapslera</li>
+          <li>Blokkere informasjonskapsler fra bestemte nettsteder</li>
+          <li>Blokkere alle informasjonskapsler</li>
+          <li>Slette alle informasjonskapsler når du lukker nettleseren</li>
+        </Box>
+      </Box>
 
-          <Typography variant="h6" component="h3" gutterBottom sx={{ mt: 3, mb: 1, fontWeight: 600, color: '#555' }}>
-            Konsekvenser av å deaktivere informasjonskapsler
-          </Typography>
-          <Typography variant="body1" paragraph sx={{ mb: 3, lineHeight: 1.7 }}>
-            Hvis du velger å deaktivere informasjonskapsler, kan noen funksjoner på nettsiden ikke fungere optimalt:
-          </Typography>
-          <Box component="ul" sx={{ mb: 3, pl: 3 }}>
-            <Typography component="li" variant="body1" sx={{ mb: 1 }}>
-              Handlekurv fungerer ikke uten økt-cookies
-            </Typography>
-            <Typography component="li" variant="body1" sx={{ mb: 1 }}>
-              Betalinger kan ikke gjennomføres uten Stripe-cookies
-            </Typography>
-            <Typography component="li" variant="body1" sx={{ mb: 1 }}>
-              Du vil få cookie-varsel ved hvert besøk
-            </Typography>
-          </Box>
-
-          <Typography variant="h5" component="h2" gutterBottom sx={{ mt: 4, mb: 2, fontWeight: 600, color: '#444' }}>
-            Oppdateringer av denne policyen
-          </Typography>
-          <Typography variant="body1" paragraph sx={{ mb: 3, lineHeight: 1.7 }}>
-            Vi vil oppdatere denne informasjonskapselpolicyen når vi implementerer nye tjenester. 
-            Du vil få mulighet til å godkjenne nye cookies før de tas i bruk.
-          </Typography>
-
-          <Typography variant="h5" component="h2" gutterBottom sx={{ mt: 4, mb: 2, fontWeight: 600, color: '#444' }}>
-            Kontakt oss
-          </Typography>
-          <Typography variant="body1" paragraph sx={{ mb: 3, lineHeight: 1.7 }}>
-            Hvis du har spørsmål om vår bruk av informasjonskapsler, kan du kontakte oss på:
-          </Typography>
-          <Box sx={{ mb: 3 }}>
-            <Typography variant="body1" sx={{ mb: 1 }}>
-              <strong>E-post:</strong> post@gumbox.no
-            </Typography>
-            <Typography variant="body1" sx={{ mb: 1 }}>
-              <strong>Telefon:</strong> +47 979 57 676
-            </Typography>
-          </Box>
-
-          <Typography variant="body2" sx={{ mt: 4, color: 'grey.600', fontStyle: 'italic' }}>
-            Sist oppdatert: 10. oktober 2024
-          </Typography>
-        </Paper>
-      </Container>
-    </Box>
+      {/* Contact section */}
+      <Box sx={{ 
+        p: 3, 
+        backgroundColor: 'grey.50', 
+        borderRadius: 2,
+        textAlign: 'center'
+      }}>
+        <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
+          Har du spørsmål om informasjonskapsler?
+        </Typography>
+        <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+          Hvis du har spørsmål om våre informasjonskapsler eller denne erklæringen, 
+          ta gjerne kontakt med oss.
+        </Typography>
+        <Button 
+          variant="contained" 
+          size="large"
+          onClick={() => window.location.href = 'mailto:post@gumbox.no'}
+        >
+          Kontakt oss
+        </Button>
+      </Box>
+    </Container>
   );
 }

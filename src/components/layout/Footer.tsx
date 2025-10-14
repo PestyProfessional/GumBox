@@ -80,7 +80,7 @@ export default function Footer() {
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
               <Link 
-                href="#" 
+                href="/faq" 
                 color="inherit" 
                 underline="hover"
                 sx={{
@@ -90,10 +90,10 @@ export default function Footer() {
                   }
                 }}
               >
-                FAQ
+                Ofte stilte spørsmål
               </Link>
               <Link 
-                href="#" 
+                href="/spor-ordre" 
                 color="inherit" 
                 underline="hover"
                 sx={{
@@ -103,20 +103,7 @@ export default function Footer() {
                   }
                 }}
               >
-                Kontakt
-              </Link>
-              <Link 
-                href="#" 
-                color="inherit" 
-                underline="hover"
-                sx={{
-                  '&:focus': {
-                    outline: 'none',
-                    textDecoration: 'underline'
-                  }
-                }}
-              >
-                Frakt & Retur
+                Spor ordre
               </Link>
             </Box>
           </Box>
@@ -128,7 +115,7 @@ export default function Footer() {
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
               <Link 
-                href="#" 
+                href="/personvern" 
                 color="inherit" 
                 underline="hover"
                 sx={{
@@ -141,7 +128,7 @@ export default function Footer() {
                 Personvern
               </Link>
               <Link 
-                href="#" 
+                href="/brukervilkar" 
                 color="inherit" 
                 underline="hover"
                 sx={{
@@ -151,7 +138,7 @@ export default function Footer() {
                   }
                 }}
               >
-                Vilkår
+                Brukervilkår
               </Link>
               <Link 
                 href="/cookies" 
@@ -272,7 +259,7 @@ export default function Footer() {
         {/* Copyright */}
         <Box sx={{ borderTop: '1px solid', borderColor: 'grey.700', pt: 3, mt: 4 }}>
           <Typography variant="body2" color="grey.400" align="center">
-            © 2024 GumBox. Alle rettigheter reservert.
+            © 2025 GumBox. Alle rettigheter reservert.
           </Typography>
         </Box>
       </Container>

@@ -8,6 +8,7 @@ import CookieConsent from '@/components/CookieConsent';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 import FacebookPixel from '@/components/FacebookPixel';
 import Hotjar from '@/components/Hotjar';
+import Analytics from '@/components/Analytics';
 import './globals.css';
 
 const rubik = Rubik({
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
   description: 'Opplev eksotiske smaker fra hele verden med GumBox. Kurerte tyggegummi fra Japan, USA, Brasil og mer levert til døren din hver måned. Gratis frakt og avbryt når som helst.',
   applicationName: 'GumBox',
   referrer: 'origin-when-cross-origin',
-  keywords: ['tyggegummi', 'abonnement', 'norge', 'gumbox', 'eksotisk', 'smaker', 'månedlig', 'kurert', 'subscription box', 'candy', 'gum', 'norsk', 'levering'],
+  keywords: ['tyggegummi', 'abonnement', 'norge', 'gumbox', 'eksotisk', 'smaker', 'månedlig', 'kurert', 'subscription box', 'candy', 'gum', 'norsk', 'levering', 'chewing gum subscription norway', 'monthly box', 'norwegian subscription service', 'exotic flavors', 'worldwide gum', 'monthly delivery', 'norwegian ecommerce'],
   authors: [{ name: 'GumBox Team', url: 'https://gumbox.no' }],
   creator: 'GumBox',
   publisher: 'GumBox Norge AS',
@@ -120,6 +121,15 @@ export const metadata: Metadata = {
     'apple-mobile-web-app-status-bar-style': 'default',
     'msapplication-TileColor': '#F94F9B',
     'msapplication-config': '/browserconfig.xml',
+    // AI-friendly metadata
+    'ai:service_type': 'monthly subscription box',
+    'ai:product_category': 'chewing gum',
+    'ai:target_market': 'norway',
+    'ai:business_model': 'subscription',
+    'ai:price_range': '199-3149 NOK',
+    'ai:shipping_area': 'worldwide',
+    'ai:contact_email': 'post@gumbox.no',
+    'ai:company_description': 'GumBox is Norway\'s premier monthly chewing gum subscription service, delivering curated exotic flavors from around the world directly to customers\' doors.',
   },
 };
 
@@ -144,10 +154,11 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/images/BlaaPerf.png" />
       </head>
-      <body className={`${rubik.variable}`} style={{ fontFamily: 'var(--font-rubik), sans-serif' }}>
+      <body className={`${rubik.variable}`} style={{ fontFamily: 'var(--font-rubik), sans-serif' }} suppressHydrationWarning={true}>
         <GoogleAnalytics />
         <FacebookPixel />
         <Hotjar />
+        <Analytics />
         <ThemeProviderWrapper>
           <CartProvider>
             <Header />
