@@ -145,6 +145,10 @@ export default function ShoppingCart() {
                   variant="contained"
                   fullWidth
                   size="large"
+                  onClick={() => {
+                    setIsOpen(false);
+                    window.location.href = '/checkout';
+                  }}
                   sx={{
                     background: 'linear-gradient(135deg, #FF1B8D 0%, #FF4DA1 100%)',
                     borderRadius: '50px',

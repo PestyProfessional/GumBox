@@ -67,7 +67,7 @@ const subscriptionPlans = [
 
 export default function ProductSubscriptionSection() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [selectedPlan, setSelectedPlan] = useState(subscriptionPlans[0]);
+  const [selectedPlan, setSelectedPlan] = useState(subscriptionPlans[3]);
   const { addItem } = useCart();
 
   const productNames = [
@@ -111,7 +111,7 @@ export default function ProductSubscriptionSection() {
       }}
     >
       <Container maxWidth="xl">
-        <Grid container spacing={{ xs: 3, md: 4, lg: 6 }} alignItems="center" sx={{ minHeight: '600px' }}>
+        <Grid container spacing={{ xs: 3, md: 4, lg: 6 }} alignItems="flex-start" sx={{ minHeight: '600px' }}>
           {/* Left side - Product showcase */}
           <Grid item xs={12} lg={6}>
             <MotionBox
@@ -140,8 +140,9 @@ export default function ProductSubscriptionSection() {
                   mb: 2,
                   boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
                   position: 'relative',
-                  height: { xs: '350px', sm: '400px', md: '450px', lg: '500px' },
+                  height: { xs: '350px', sm: '400px', md: '420px', lg: '460px' },
                   aspectRatio: '4/3',
+                  mt: { md: 12, lg: 14 },
                 }}
               >
                 <Box
@@ -326,6 +327,7 @@ export default function ProductSubscriptionSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, delay: 0.2 }}
+              sx={{ mt: { md: 4, lg: 6 } }}
             >
               {/* Plan selection heading with underline */}
               <Box sx={{ mb: 3, textAlign: 'center', position: 'relative' }}>
@@ -485,9 +487,19 @@ export default function ProductSubscriptionSection() {
                 </Button>
 
                 {/* Billing info */}
-                <Typography sx={{ fontSize: '0.8rem', color: '#666', mt: 2, mb: 2 }}>
-                  Total pluss fraktgebyr beregnes ved kassen. Alle priser er i NOK og faktureres hver {selectedPlan.months} måned{selectedPlan.months > 1 ? 'er' : ''}.
-                </Typography>
+                <Box sx={{ minHeight: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Typography sx={{ fontSize: '0.8rem', color: '#666', textAlign: 'center', lineHeight: 1.4 }}>
+                    Total pluss fraktgebyr beregnes ved kassen. Alle priser er i NOK og faktureres månedlig.
+                    {selectedPlan.months > 1 && (
+                      <br />
+                    )}
+                    {selectedPlan.months > 1 && (
+                      <span style={{ color: '#FF6F3C', fontWeight: 500 }}>
+                        Restbeløp faktureres ved tidlig avbrudd.
+                      </span>
+                    )}
+                  </Typography>
+                </Box>
 
                 {/* Features */}
                 <Stack direction="row" justifyContent="center" spacing={4} sx={{ mt: 2 }}>
@@ -509,16 +521,18 @@ export default function ProductSubscriptionSection() {
                         width: 16,
                         height: 16,
                         borderRadius: '50%',
-                        backgroundColor: '#FF6F3C',
+                        backgroundColor: selectedPlan.months === 1 ? '#4CAF50' : '#FF6F3C',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                       }}
                     >
-                      <Typography sx={{ fontSize: '0.7rem', color: 'white' }}>✕</Typography>
+                      <Typography sx={{ fontSize: '0.7rem', color: 'white' }}>
+                        {selectedPlan.months === 1 ? '✓' : '✕'}
+                      </Typography>
                     </Box>
                     <Typography sx={{ fontSize: '0.8rem', color: '#666' }}>
-                      Avslutt når som helst
+                      {selectedPlan.months === 1 ? 'Avslutt når som helst' : `Forplikter til ${selectedPlan.months} måneder`}
                     </Typography>
                   </Stack>
                 </Stack>
