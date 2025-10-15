@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { 
   Star as StarIcon, 
   Favorite as FavoriteIcon, 
@@ -26,6 +27,7 @@ const MotionTypography = motion.create(Typography);
 
 export default function AboutPage() {
   const { t } = useTranslation();
+  const router = useRouter();
   return (
     <Box sx={{ overflow: 'hidden' }}>
       {/* Hero Image at Top */}
@@ -103,7 +105,7 @@ export default function AboutPage() {
           <Typography 
             variant="h6" 
             sx={{ 
-              mb: 4, 
+              mb: 6, 
               color: 'text.primary',
               lineHeight: 1.7,
               fontWeight: 400,
@@ -115,6 +117,93 @@ export default function AboutPage() {
           >
             {t('aboutUsStory')}
           </Typography>
+
+          {/* Meet our founders section */}
+          <MotionBox
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            sx={{ 
+              mb: 6,
+              p: 4,
+              borderRadius: '24px',
+              backgroundColor: 'rgba(249, 79, 155, 0.02)',
+              border: '1px solid rgba(249, 79, 155, 0.1)'
+            }}
+          >
+            <Typography 
+              variant="h4" 
+              sx={{ 
+                fontWeight: 700, 
+                mb: 4,
+                color: '#F94F9B',
+                fontSize: { xs: '1.8rem', md: '2.2rem' }
+              }}
+            >
+              {t('meetOurFounder')}
+            </Typography>
+            
+            <Box sx={{ 
+              display: 'flex', 
+              flexDirection: { xs: 'column', md: 'row' },
+              alignItems: 'center',
+              gap: 4,
+              maxWidth: '900px',
+              mx: 'auto'
+            }}>
+              {/* Founder Image */}
+              <Box sx={{ 
+                flex: '0 0 auto',
+                order: { xs: 1, md: 1 }
+              }}>
+                <Box
+                  sx={{
+                    width: { xs: 240, md: 280 },
+                    height: { xs: 240, md: 280 },
+                    borderRadius: '50%',
+                    overflow: 'hidden',
+                    boxShadow: '0 12px 40px rgba(249, 79, 155, 0.15)',
+                    border: '3px solid rgba(249, 79, 155, 0.2)',
+                    mx: 'auto'
+                  }}
+                >
+                  <Image
+                    src="/images/Founders.JPG"
+                    alt="GumBox Founders"
+                    width={320}
+                    height={320}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: '70% center',
+                      borderRadius: '50%'
+                    }}
+                  />
+                </Box>
+              </Box>
+              
+              {/* Founder Description */}
+              <Box sx={{ 
+                flex: 1,
+                textAlign: { xs: 'center', md: 'left' },
+                order: { xs: 2, md: 2 }
+              }}>
+                <Typography 
+                  variant="body1" 
+                  sx={{ 
+                    color: 'text.primary',
+                    lineHeight: 1.8,
+                    fontSize: { xs: '1rem', md: '1.1rem' },
+                    fontWeight: 400,
+                    whiteSpace: 'pre-line'
+                  }}
+                >
+                  {t('founderDescription')}
+                </Typography>
+              </Box>
+            </Box>
+          </MotionBox>
 
           <Typography 
             variant="h5" 
@@ -141,7 +230,7 @@ export default function AboutPage() {
             {t('aboutUsThankYou')}
           </Typography>
 
-          <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', justifyContent: 'center' }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <Button
               variant="contained"
               size="large"
@@ -159,30 +248,10 @@ export default function AboutPage() {
                 transition: 'all 0.3s ease'
               }}
               onClick={() => {
-                document.getElementById('plan-selection')?.scrollIntoView({ behavior: 'smooth' });
+                router.push('/#plan-selection');
               }}
             >
               {t('startSubscription')}
-            </Button>
-            
-            <Button
-              variant="outlined"
-              size="large"
-              sx={{
-                px: 4,
-                py: 1.5,
-                borderRadius: '16px',
-                borderColor: '#F94F9B',
-                color: '#F94F9B',
-                '&:hover': {
-                  borderColor: '#D63A7C',
-                  backgroundColor: 'rgba(249, 79, 155, 0.05)',
-                  transform: 'translateY(-2px)',
-                },
-                transition: 'all 0.3s ease'
-              }}
-            >
-              {t('learnMore')}
             </Button>
           </Box>
         </MotionBox>
