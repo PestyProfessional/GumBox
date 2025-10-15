@@ -2,8 +2,10 @@
 
 import { Box, Container, Typography, Link, Button } from '@mui/material';
 import { usePathname, useRouter } from 'next/navigation';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export default function Footer() {
+  const { t } = useTranslation();
   const pathname = usePathname();
   const router = useRouter();
 
@@ -28,18 +30,17 @@ export default function Footer() {
           {/* Company Info */}
           <Box>
             <Typography variant="h6" gutterBottom>
-              GumBox
+              {t('company')}
             </Typography>
             <Typography variant="body2" sx={{ mb: 2 }}>
-              Kurerte produkter som inspirerer og gleder. 
-              Levert til døren din hver måned.
+              {t('companyDescription')}
             </Typography>
           </Box>
 
           {/* Quick Links */}
           <Box>
             <Typography variant="h6" gutterBottom>
-              Lenker
+              {t('links')}
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
               <Link 
@@ -55,7 +56,7 @@ export default function Footer() {
                   }
                 }}
               >
-                Abonnement
+                {t('subscription')}
               </Link>
               <Link 
                 href="/om-oss" 
@@ -68,7 +69,7 @@ export default function Footer() {
                   }
                 }}
               >
-                Om Oss
+                {t('aboutUs')}
               </Link>
             </Box>
           </Box>
@@ -76,7 +77,7 @@ export default function Footer() {
           {/* Support */}
           <Box>
             <Typography variant="h6" gutterBottom>
-              Kundeservice
+              {t('customerService')}
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
               <Link 
@@ -90,7 +91,7 @@ export default function Footer() {
                   }
                 }}
               >
-                Ofte stilte spørsmål
+                {t('faq')}
               </Link>
               <Link 
                 href="/spor-ordre" 
@@ -103,7 +104,7 @@ export default function Footer() {
                   }
                 }}
               >
-                Spor ordre
+                {t('trackOrder')}
               </Link>
             </Box>
           </Box>
@@ -111,7 +112,7 @@ export default function Footer() {
           {/* Legal */}
           <Box>
             <Typography variant="h6" gutterBottom>
-              Juridisk
+              {t('legal')}
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
               <Link 
@@ -125,7 +126,7 @@ export default function Footer() {
                   }
                 }}
               >
-                Personvern
+                {t('privacy')}
               </Link>
               <Link 
                 href="/brukervilkar" 
@@ -138,7 +139,7 @@ export default function Footer() {
                   }
                 }}
               >
-                Brukervilkår
+                {t('terms')}
               </Link>
               <Link 
                 href="/cookies" 
@@ -151,7 +152,7 @@ export default function Footer() {
                   }
                 }}
               >
-                Informasjonskapsler
+                {t('cookies')}
               </Link>
             </Box>
           </Box>
@@ -159,7 +160,7 @@ export default function Footer() {
           {/* Contact */}
           <Box>
             <Typography variant="h6" gutterBottom>
-              Kontakt
+              {t('contact')}
             </Typography>
             <Typography variant="body2">
               post@gumbox.no
@@ -181,7 +182,7 @@ export default function Footer() {
             {/* Payment Methods */}
             <Box>
               <Typography variant="h6" gutterBottom sx={{ fontSize: '1rem', fontWeight: 600 }}>
-                Trygge betalingsmetoder
+                {t('securePayment')}
               </Typography>
               <Box sx={{ 
                 display: 'flex', 
@@ -225,7 +226,7 @@ export default function Footer() {
             {/* Shipping Options */}
             <Box>
               <Typography variant="h6" gutterBottom sx={{ fontSize: '1rem', fontWeight: 600 }}>
-                Rask levering med
+                {t('fastDelivery')}
               </Typography>
               <Box sx={{ 
                 display: 'flex', 
@@ -259,7 +260,7 @@ export default function Footer() {
         {/* Copyright */}
         <Box sx={{ borderTop: '1px solid', borderColor: 'grey.700', pt: 3, mt: 4 }}>
           <Typography variant="body2" color="grey.400" align="center">
-            © 2025 GumBox. Alle rettigheter reservert.
+            © 2025 GumBox. {t('allRightsReserved')}
           </Typography>
         </Box>
       </Container>

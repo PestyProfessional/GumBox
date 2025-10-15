@@ -6,8 +6,11 @@ import { Menu as MenuIcon, Close as CloseIcon, ArrowBack } from '@mui/icons-mate
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import ShoppingCart from '@/components/ui/ShoppingCart';
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export default function Header() {
+  const { t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
@@ -44,8 +47,8 @@ export default function Header() {
   };
 
   const navItems = [
-    { name: 'Abonnement', href: '#plan-selection' },
-    { name: 'Om Oss', href: '/om-oss' },
+    { name: t('subscription'), href: '#plan-selection' },
+    { name: t('aboutUs'), href: '/om-oss' },
   ];
 
   const drawer = (
@@ -101,7 +104,7 @@ export default function Header() {
             }}
             sx={{ py: 1.5 }}
           >
-            Start Abonnement
+            {t('startSubscription')}
           </Button>
         </ListItem>
       </List>
@@ -219,14 +222,18 @@ export default function Header() {
                 {/* Spacer to center navigation */}
                 <Box sx={{ flexGrow: 1 }} />
                 
-                {/* Shopping Cart - Right */}
-                <ShoppingCart />
+                {/* Language Switcher and Shopping Cart - Right */}
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <LanguageSwitcher />
+                  <ShoppingCart />
+                </Box>
               </>
             )}
 
             {/* Mobile Navigation */}
             {isMobile && (
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <LanguageSwitcher />
                 <ShoppingCart />
                 <IconButton 
                   onClick={handleDrawerToggle}

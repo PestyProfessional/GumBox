@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { ArrowBackIos, ArrowForwardIos, Star } from '@mui/icons-material';
 import { useCart } from '@/contexts/CartContext';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const MotionBox = motion(Box);
 const MotionCard = motion(Card);
@@ -20,55 +21,59 @@ const productImages = [
   '/images/RosaPerf.png',
 ];
 
-const subscriptionPlans = [
-  {
-    id: '12-month',
-    duration: '12 Måned Plan',
-    price: '199',
-    originalPrice: '299',
-    savings: '100',
-    badge: 'BEST VALUE',
-    badgeColor: '#FF6F3C',
-    bonus: 'Signup Bonus',
-    bonusText: 'Ekstra GumBox Starter Kit',
-    popular: false,
-    months: 12,
-  },
-  {
-    id: '6-month',
-    duration: '6 Måned Plan', 
-    price: '229',
-    originalPrice: '299',
-    savings: '70',
-    badge: 'POPULÆR',
-    badgeColor: '#2E8BFF',
-    popular: true,
-    months: 6,
-  },
-  {
-    id: '3-month',
-    duration: '3 Måned Plan',
-    price: '249',
-    originalPrice: '299',
-    savings: '50',
-    popular: false,
-    months: 3,
-  },
-  {
-    id: 'monthly',
-    duration: 'Månedlig Plan',
-    price: '299',
-    originalPrice: '299',
-    savings: '0',
-    popular: false,
-    months: 1,
-  },
-];
+// Move plans inside component to access translations
 
 export default function ProductSubscriptionSection() {
+  const { t } = useTranslation();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [selectedPlan, setSelectedPlan] = useState(subscriptionPlans[3]);
   const { addItem } = useCart();
+
+  const subscriptionPlans = [
+    {
+      id: '12-month',
+      duration: t('twelveMonthPlan'),
+      price: '199',
+      originalPrice: '299',
+      savings: '100',
+      badge: t('bestValue'),
+      badgeColor: '#FF6F3C',
+      bonus: 'Signup Bonus',
+      bonusText: 'Ekstra GumBox Starter Kit',
+      popular: false,
+      months: 12,
+    },
+    {
+      id: '6-month',
+      duration: t('sixMonthPlan'), 
+      price: '229',
+      originalPrice: '299',
+      savings: '70',
+      badge: t('mostPopular'),
+      badgeColor: '#2E8BFF',
+      popular: true,
+      months: 6,
+    },
+    {
+      id: '3-month',
+      duration: t('threeMonthPlan'),
+      price: '249',
+      originalPrice: '299',
+      savings: '50',
+      popular: false,
+      months: 3,
+    },
+    {
+      id: 'monthly',
+      duration: t('monthlyPlan'),
+      price: '299',
+      originalPrice: '299',
+      savings: '0',
+      popular: false,
+      months: 1,
+    },
+  ];
+
+  const [selectedPlan, setSelectedPlan] = useState(subscriptionPlans[3]);
 
   const productNames = [
     'Blå GumBox',
@@ -340,7 +345,7 @@ export default function ProductSubscriptionSection() {
                     mb: 1,
                   }}
                 >
-                  Velg din plan
+                  {t('choosePlan')}
                 </Typography>
                 <Box
                   sx={{
@@ -410,7 +415,7 @@ export default function ProductSubscriptionSection() {
                           </Typography>
                           {plan.savings && plan.savings !== '0' && (
                             <Typography sx={{ fontSize: '0.9rem', color: '#666' }}>
-                              Spar kr {plan.savings}
+                              {t('saveKr')} {plan.savings}
                             </Typography>
                           )}
                         </Box>
@@ -422,10 +427,10 @@ export default function ProductSubscriptionSection() {
                               color: '#1A1A1A',
                             }}
                           >
-                            kr{plan.price}
+                            {t('currency')}{plan.price}
                           </Typography>
                           <Typography sx={{ fontSize: '0.9rem', color: '#666' }}>
-                            / måned
+                            {t('perMonthShort')}
                           </Typography>
                         </Box>
                       </Box>
@@ -447,7 +452,7 @@ export default function ProductSubscriptionSection() {
                         textDecoration: 'line-through',
                       }}
                     >
-                      kr{selectedPlan.originalPrice}.00
+                      {t('currency')}{selectedPlan.originalPrice}.00
                     </Typography>
                   )}
                   <Typography
@@ -457,7 +462,7 @@ export default function ProductSubscriptionSection() {
                       color: '#1A1A1A',
                     }}
                   >
-                    kr{selectedPlan.price}.00
+                    {t('currency')}{selectedPlan.price}.00
                   </Typography>
                   <Typography sx={{ fontSize: '1rem', color: '#666' }}>
                     NOK
@@ -483,19 +488,19 @@ export default function ProductSubscriptionSection() {
                     },
                   }}
                 >
-                  Legg til i handlekurv 🛒
+                  {t('addToCart')}
                 </Button>
 
                 {/* Billing info */}
                 <Box sx={{ minHeight: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <Typography sx={{ fontSize: '0.8rem', color: '#666', textAlign: 'center', lineHeight: 1.4 }}>
-                    Total pluss fraktgebyr beregnes ved kassen. Alle priser er i NOK og faktureres månedlig.
+                    {t('billingInfo')}
                     {selectedPlan.months > 1 && (
                       <br />
                     )}
                     {selectedPlan.months > 1 && (
                       <span style={{ color: '#FF6F3C', fontWeight: 500 }}>
-                        Restbeløp faktureres ved tidlig avbrudd.
+                        {t('earlyTermination')}
                       </span>
                     )}
                   </Typography>
@@ -511,7 +516,7 @@ export default function ProductSubscriptionSection() {
                       height={16}
                     />
                     <Typography sx={{ fontSize: '0.8rem', color: '#666' }}>
-                      Automatisk fornyelse
+                      {t('autoRenewal')}
                     </Typography>
                   </Stack>
 
@@ -532,7 +537,7 @@ export default function ProductSubscriptionSection() {
                       </Typography>
                     </Box>
                     <Typography sx={{ fontSize: '0.8rem', color: '#666' }}>
-                      {selectedPlan.months === 1 ? 'Avslutt når som helst' : `Forplikter til ${selectedPlan.months} måneder`}
+                      {selectedPlan.months === 1 ? t('cancelAnytime') : `${t('commitment')} ${selectedPlan.months} ${t('months')}`}
                     </Typography>
                   </Stack>
                 </Stack>

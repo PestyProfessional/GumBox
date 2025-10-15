@@ -14,6 +14,9 @@ import {
 import { useRouter } from 'next/navigation';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useTranslation } from '@/hooks/useTranslation';
+import { faqContent, FAQItem } from '@/lib/faqContent';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface FAQItem {
   question: string;
@@ -22,6 +25,8 @@ interface FAQItem {
 }
 
 export default function FAQ() {
+  const { t } = useTranslation();
+  const { language } = useLanguage();
   const router = useRouter();
   const [expanded, setExpanded] = useState<string | false>(false);
 
@@ -29,7 +34,12 @@ export default function FAQ() {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const faqData: FAQItem[] = [
+  // Get FAQ data based on current language
+  const currentFaqContent = faqContent[language];
+  const faqData: FAQItem[] = currentFaqContent.data;
+  
+  // Keep the old data as fallback (remove this after testing)
+  const oldFaqData: FAQItem[] = [
     // Ordre og levering
     {
       category: "Ordre og levering",
@@ -140,15 +150,15 @@ export default function FAQ() {
             }
           }}
         >
-          Tilbake
+          {t('back')}
         </Button>
         
         <Typography variant="h3" component="h1" sx={{ mb: 2, fontWeight: 700 }}>
-          Ofte stilte spørsmål
+          {t('faqTitle')}
         </Typography>
         
         <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
-          Finn svar på de mest vanlige spørsmålene om GumBox
+          {currentFaqContent.subtitle}
         </Typography>
       </Box>
 
@@ -229,17 +239,17 @@ export default function FAQ() {
         textAlign: 'center'
       }}>
         <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
-          Fant du ikke svaret du lette etter?
+          {currentFaqContent.contactSectionTitle}
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-          Ta kontakt med vår kundeservice, så hjelper vi deg gjerne!
+          {currentFaqContent.contactSectionSubtitle}
         </Typography>
         <Button 
           variant="contained" 
           size="large"
           onClick={() => window.location.href = 'mailto:post@gumbox.no'}
         >
-          Kontakt kundeservice
+          {currentFaqContent.contactButton}
         </Button>
       </Box>
     </Container>

@@ -3,8 +3,10 @@
 import { Box, Container, Typography, Button, Paper } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export default function SporOrdre() {
+  const { t } = useTranslation();
   const router = useRouter();
 
   const trackingOptions = [
@@ -47,15 +49,15 @@ export default function SporOrdre() {
             }
           }}
         >
-          Tilbake
+          {t('back')}
         </Button>
         
         <Typography variant="h3" component="h1" sx={{ mb: 2, fontWeight: 700 }}>
-          Spor din ordre
+          {t('trackOrderTitle')}
         </Typography>
         
         <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
-          Velg din leverandør for å spore ordren din
+          {t('trackOrderSubtitle')}
         </Typography>
       </Box>
 

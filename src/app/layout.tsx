@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Rubik } from 'next/font/google';
 import ThemeProviderWrapper from '@/components/layout/ThemeProviderWrapper';
 import { CartProvider } from '@/contexts/CartContext';
+import { LanguageProvider } from '@/contexts/LanguageContext';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import CookieConsent from '@/components/CookieConsent';
@@ -160,14 +161,16 @@ export default function RootLayout({
         <Hotjar />
         <Analytics />
         <ThemeProviderWrapper>
-          <CartProvider>
-            <Header />
-            <main role="main" id="main-content">
-              {children}
-            </main>
-            <Footer />
-            <CookieConsent />
-          </CartProvider>
+          <LanguageProvider>
+            <CartProvider>
+              <Header />
+              <main role="main" id="main-content">
+                {children}
+              </main>
+              <Footer />
+              <CookieConsent />
+            </CartProvider>
+          </LanguageProvider>
         </ThemeProviderWrapper>
       </body>
     </html>

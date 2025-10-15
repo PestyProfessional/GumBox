@@ -75,78 +75,219 @@ export default function AboutUsSection() {
     >
       {/* Hero Section */}
       <Container maxWidth="lg" sx={{ py: { xs: 8, md: 12 } }}>
-        <MotionBox
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          sx={{ textAlign: 'center', mb: 8 }}
-        >
-          <Chip 
-            label="Om GumBox" 
-            sx={{ 
-              mb: 3, 
-              bgcolor: 'primary.50', 
-              color: 'primary.main',
-              fontWeight: 'bold',
-              px: 2,
-              py: 0.5,
-            }} 
-          />
-          <MotionTypography
-            variant="h1"
-            sx={{
-              fontSize: { xs: '2.5rem', md: '3.5rem', lg: '4rem' },
-              fontWeight: 800,
-              background: 'linear-gradient(135deg, #F94F9B 0%, #FF6F3C 100%)',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              mb: 3,
-            }}
-          >
-            Vår Historie og Visjon
-          </MotionTypography>
-          <Typography
-            variant="h5"
-            sx={{
-              color: 'text.secondary',
-              maxWidth: '800px',
-              mx: 'auto',
-              lineHeight: 1.6,
-              mb: 6,
-            }}
-          >
-            GumBox startet som en drøm om å dele verdens mest unike og eksotiske tyggegummi 
-            med tyggegummi-entusiaster i Norge. I dag er vi stolte av å være landets ledende 
-            kurerte tyggegummi-abonnement.
-          </Typography>
-        </MotionBox>
+        <Grid container spacing={6} alignItems="center">
+          {/* Left Content */}
+          <Grid item xs={12} lg={6}>
+            <MotionBox
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <Chip 
+                label="Om GumBox" 
+                sx={{ 
+                  mb: 3, 
+                  bgcolor: 'primary.50', 
+                  color: 'primary.main',
+                  fontWeight: 'bold',
+                  px: 3,
+                  py: 1,
+                  borderRadius: '24px',
+                }} 
+              />
+              <MotionTypography
+                variant="h1"
+                sx={{
+                  fontSize: { xs: '2.5rem', md: '3.5rem', lg: '4rem' },
+                  fontWeight: 800,
+                  background: 'linear-gradient(135deg, #F94F9B 0%, #FF6F3C 100%)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  mb: 3,
+                  lineHeight: 1.1,
+                }}
+              >
+                Vår Historie og Visjon
+              </MotionTypography>
+              <Typography
+                variant="h5"
+                sx={{
+                  color: 'text.secondary',
+                  lineHeight: 1.6,
+                  mb: 6,
+                  fontSize: { xs: '1.1rem', md: '1.3rem' },
+                }}
+              >
+                GumBox startet som en drøm om å dele verdens mest unike og eksotiske tyggegummi 
+                med tyggegummi-entusiaster i Norge. I dag er vi stolte av å være landets ledende 
+                kurerte tyggegummi-abonnement.
+              </Typography>
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3}>
+                <Button
+                  variant="contained"
+                  size="large"
+                  sx={{
+                    px: 4,
+                    py: 2,
+                    fontSize: '1.1rem',
+                    fontWeight: 'bold',
+                    borderRadius: '16px',
+                    background: 'linear-gradient(135deg, #F94F9B 0%, #FF6F3C 100%)',
+                    '&:hover': {
+                      transform: 'translateY(-2px)',
+                      boxShadow: '0 8px 24px rgba(249, 79, 155, 0.3)',
+                    },
+                    transition: 'all 0.3s ease',
+                  }}
+                  onClick={() => {
+                    document.getElementById('plan-selection')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  Start Din Reise
+                </Button>
+                <Button
+                  variant="outlined"
+                  size="large"
+                  sx={{
+                    px: 4,
+                    py: 2,
+                    fontSize: '1.1rem',
+                    fontWeight: 'bold',
+                    borderRadius: '16px',
+                    borderWidth: '2px',
+                    '&:hover': {
+                      borderWidth: '2px',
+                      transform: 'translateY(-2px)',
+                    },
+                    transition: 'all 0.3s ease',
+                  }}
+                >
+                  Utforsk Produkter
+                </Button>
+              </Stack>
+            </MotionBox>
+          </Grid>
+
+          {/* Right Image */}
+          <Grid item xs={12} lg={6}>
+            <MotionBox
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              sx={{
+                position: 'relative',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Box
+                component="img"
+                src="/images/HeroAboutUs.png"
+                alt="GumBox produktutvalg"
+                sx={{
+                  width: '100%',
+                  maxWidth: '500px',
+                  height: 'auto',
+                  borderRadius: '32px',
+                  boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
+                  '&:hover': {
+                    transform: 'scale(1.02)',
+                    boxShadow: '0 24px 48px rgba(0, 0, 0, 0.15)',
+                  },
+                  transition: 'all 0.3s ease',
+                }}
+              />
+              {/* Decorative elements */}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: -20,
+                  right: -20,
+                  width: 100,
+                  height: 100,
+                  borderRadius: '50%',
+                  background: 'linear-gradient(135deg, #F94F9B20, #FF6F3C20)',
+                  zIndex: -1,
+                }}
+              />
+              <Box
+                sx={{
+                  position: 'absolute',
+                  bottom: -30,
+                  left: -30,
+                  width: 80,
+                  height: 80,
+                  borderRadius: '50%',
+                  background: 'linear-gradient(135deg, #FF6F3C20, #F94F9B20)',
+                  zIndex: -1,
+                }}
+              />
+            </MotionBox>
+          </Grid>
+        </Grid>
 
         {/* Stats Section */}
         <MotionBox
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          sx={{ mb: 10 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          sx={{ 
+            mb: 12, 
+            mt: 10,
+            py: 6,
+            px: 4,
+            background: 'linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 100%)',
+            borderRadius: '32px',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255,255,255,0.3)',
+          }}
         >
           <Grid container spacing={4}>
             {stats.map((stat, index) => (
               <Grid item xs={6} md={3} key={index}>
-                <Box sx={{ textAlign: 'center' }}>
+                <MotionBox
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
+                  sx={{ 
+                    textAlign: 'center',
+                    py: 3,
+                    px: 2,
+                    borderRadius: '20px',
+                    '&:hover': {
+                      background: 'rgba(249, 79, 155, 0.05)',
+                      transform: 'translateY(-4px)',
+                    },
+                    transition: 'all 0.3s ease',
+                  }}
+                >
                   <Typography
                     variant="h3"
                     sx={{
                       fontWeight: 800,
-                      color: 'primary.main',
+                      background: 'linear-gradient(135deg, #F94F9B 0%, #FF6F3C 100%)',
+                      backgroundClip: 'text',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
                       mb: 1,
+                      fontSize: { xs: '2rem', md: '2.5rem' },
                     }}
                   >
                     {stat.number}
                   </Typography>
-                  <Typography variant="body1" color="text.secondary">
+                  <Typography 
+                    variant="body1" 
+                    sx={{
+                      color: 'text.secondary',
+                      fontWeight: 600,
+                      fontSize: { xs: '0.9rem', md: '1rem' },
+                    }}
+                  >
                     {stat.label}
                   </Typography>
-                </Box>
+                </MotionBox>
               </Grid>
             ))}
           </Grid>
@@ -183,12 +324,15 @@ export default function AboutUsSection() {
                     sx={{
                       height: '100%',
                       textAlign: 'center',
-                      border: '2px solid',
+                      borderRadius: '24px',
+                      border: '1px solid',
                       borderColor: 'grey.100',
+                      background: 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 100%)',
+                      backdropFilter: 'blur(10px)',
                       '&:hover': {
                         borderColor: 'primary.main',
-                        transform: 'translateY(-4px)',
-                        boxShadow: '0 12px 24px rgba(249, 79, 155, 0.15)',
+                        transform: 'translateY(-8px)',
+                        boxShadow: '0 20px 40px rgba(249, 79, 155, 0.2)',
                       },
                       transition: 'all 0.3s ease',
                     }}
@@ -250,9 +394,13 @@ export default function AboutUsSection() {
                   transition={{ duration: 0.6, delay: 1 + index * 0.1 }}
                   sx={{
                     textAlign: 'center',
+                    borderRadius: '24px',
+                    background: 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 100%)',
+                    backdropFilter: 'blur(10px)',
+                    border: '1px solid rgba(255,255,255,0.3)',
                     '&:hover': {
-                      transform: 'scale(1.02)',
-                      boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
+                      transform: 'translateY(-6px) scale(1.02)',
+                      boxShadow: '0 16px 40px rgba(0,0,0,0.15)',
                     },
                     transition: 'all 0.3s ease',
                   }}
@@ -317,9 +465,21 @@ export default function AboutUsSection() {
             textAlign: 'center',
             py: 8,
             px: 4,
-            borderRadius: 4,
+            borderRadius: '32px',
             background: 'linear-gradient(135deg, #F94F9B 0%, #FF6F3C 100%)',
             color: 'white',
+            position: 'relative',
+            overflow: 'hidden',
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
+              borderRadius: '32px',
+            },
           }}
         >
           <Typography variant="h3" sx={{ fontWeight: 'bold', mb: 3 }}>
@@ -339,10 +499,15 @@ export default function AboutUsSection() {
                 py: 2,
                 fontSize: '1.1rem',
                 fontWeight: 'bold',
+                borderRadius: '16px',
+                zIndex: 1,
+                position: 'relative',
                 '&:hover': {
                   bgcolor: 'grey.100',
                   transform: 'translateY(-2px)',
+                  boxShadow: '0 8px 24px rgba(0,0,0,0.2)',
                 },
+                transition: 'all 0.3s ease',
               }}
               onClick={() => {
                 document.getElementById('plan-selection')?.scrollIntoView({ behavior: 'smooth' });
@@ -360,10 +525,17 @@ export default function AboutUsSection() {
                 py: 2,
                 fontSize: '1.1rem',
                 fontWeight: 'bold',
+                borderRadius: '16px',
+                borderWidth: '2px',
+                zIndex: 1,
+                position: 'relative',
                 '&:hover': {
                   borderColor: 'white',
-                  bgcolor: 'rgba(255,255,255,0.1)',
+                  borderWidth: '2px',
+                  bgcolor: 'rgba(255,255,255,0.15)',
+                  transform: 'translateY(-2px)',
                 },
+                transition: 'all 0.3s ease',
               }}
             >
               Les Mer

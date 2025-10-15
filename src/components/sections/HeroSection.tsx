@@ -5,12 +5,14 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowForward as ArrowForwardIcon, PlayArrow as PlayArrowIcon, Star as StarIcon } from '@mui/icons-material';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const MotionBox = motion(Box);
 const MotionTypography = motion(Typography);
 const MotionButton = motion(Button);
 
 export default function HeroSection() {
+  const { t } = useTranslation();
   return (
     <Box
       sx={{
@@ -57,7 +59,7 @@ export default function HeroSection() {
             },
           }}
         >
-          Start Abonnement
+          {t('startSubscription')}
         </MotionButton>
       </MotionBox>
     </Box>
