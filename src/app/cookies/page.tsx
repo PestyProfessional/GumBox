@@ -176,7 +176,7 @@ export default function CookiesPage() {
       <Box sx={{ mb: 4 }}>
         <Button
           startIcon={<ArrowBackIcon />}
-          onClick={() => router.back()}
+          onClick={() => router.push('/')}
           sx={{ 
             mb: 2,
             color: 'text.secondary',

@@ -15,9 +15,10 @@ export default function DecorativeSection() {
         mt: { xs: '-0.5rem', md: '-0.75rem' },
         minHeight: { xs: '70vh', sm: '75vh', md: '80vh', lg: '85vh', xl: '90vh' },
         maxHeight: { xs: '90vh', sm: '95vh', md: '100vh', lg: '105vh', xl: '110vh' },
-        background: 'linear-gradient(180deg, rgba(255, 111, 60, 0.1) 0%, rgba(255, 111, 60, 0.05) 50%, rgba(255, 111, 60, 0.1) 100%)',
+        background: 'linear-gradient(180deg, rgba(255, 130, 65, 0.25) 0%, rgba(255, 120, 62, 0.18) 70%, rgba(255, 111, 60, 0.1) 100%)',
         position: 'relative',
         overflow: 'hidden',
+        zIndex: -1,
       }}
     >
       <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1, px: { xs: '4%', md: '6%' } }}>
@@ -118,7 +119,7 @@ export default function DecorativeSection() {
           >
             {/* Background image */}
             <Image
-              src="/images/Gul-rosa.png"
+              src="/images/ComputerPinkImage.png"
               alt="GumBox background"
               fill
               sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 90vw, (max-width: 1200px) 85vw, (max-width: 1440px) 80vw, 1200px"
@@ -141,57 +142,6 @@ export default function DecorativeSection() {
               }}
             />
 
-            {/* Content container */}
-            <Box
-              sx={{
-                position: 'absolute',
-                inset: 0,
-                display: 'flex',
-                alignItems: 'flex-end',
-                justifyContent: 'center',
-                p: { xs: '4%', md: '6%' },
-                pb: { xs: '4%', sm: '6%', md: '8%', lg: '10%', xl: '12%' },
-                pl: { xs: '4%', sm: '6%', md: '8%', lg: '10%', xl: '12%' },
-                zIndex: 2,
-              }}
-            >
-              <MotionButton
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ 
-                  duration: 0.6, 
-                  delay: 0.8 
-                }}
-                whileHover={{ 
-                  scale: 1.05,
-                  boxShadow: '0 8px 25px rgba(0, 0, 0, 0.2)',
-                }}
-                whileTap={{ scale: 0.98 }}
-                variant="contained"
-                size="large"
-                onClick={() => {
-                  document.getElementById('plan-selection')?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                sx={{
-                  px: { xs: '1.5rem', md: '2rem' },
-                  py: { xs: '0.75rem', md: '1rem' },
-                  fontSize: { xs: '0.75rem', md: '1rem' },
-                  fontWeight: 600,
-                  borderRadius: '50px',
-                  background: 'linear-gradient(135deg, #FF6F3C 0%, #FF8A5B 100%)',
-                  boxShadow: '0 6px 20px rgba(255, 111, 60, 0.4)',
-                  color: 'white',
-                  textTransform: 'none',
-                  border: 'none',
-                  '&:hover': {
-                    background: 'linear-gradient(135deg, #E55A2B 0%, #FF6F3C 100%)',
-                  },
-                }}
-              >
-                Gjenopplev tyggegummi-eventyret 🌍
-              </MotionButton>
-            </Box>
           </MotionBox>
         </Box>
       </Container>
