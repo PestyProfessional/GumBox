@@ -77,6 +77,13 @@ export const translations = {
     trackOrderTitle: 'Spor ordre',
     trackOrderSubtitle: 'Spor din ordre med våre leverandører',
     trackOrderDescription: 'Spor din ordre med',
+    trackWithPosten: 'Spor din ordre med Posten',
+    trackWithPostNord: 'Spor din ordre med PostNord',
+    trackWithHelthjem: 'Spor din ordre med Helthjem',
+    trackOrderAction: 'Spor ordre →',
+    needHelp: 'Trenger du hjelp?',
+    needHelpDescription: 'Hvis du ikke finner ordren din eller har andre spørsmål, kan du kontakte vår kundeservice.',
+    contactCustomerService: 'Kontakt kundeservice',
   },
   en: {
     // Header
@@ -156,6 +163,13 @@ export const translations = {
     trackOrderTitle: 'Track Order',
     trackOrderSubtitle: 'Track your order with our carriers',
     trackOrderDescription: 'Track your order with',
+    trackWithPosten: 'Track your order with Posten',
+    trackWithPostNord: 'Track your order with PostNord',
+    trackWithHelthjem: 'Track your order with Helthjem',
+    trackOrderAction: 'Track order →',
+    needHelp: 'Need help?',
+    needHelpDescription: 'If you cannot find your order or have other questions, you can contact our customer service.',
+    contactCustomerService: 'Contact customer service',
   }
 };
 

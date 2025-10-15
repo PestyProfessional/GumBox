@@ -14,19 +14,19 @@ export default function SporOrdre() {
       name: 'Posten',
       logo: '/images/shipping/logo-posten-round-30.svg',
       url: 'https://www.posten.no/sporing-kundeservice',
-      description: 'Spor din ordre med Posten'
+      description: t('trackWithPosten')
     },
     {
       name: 'PostNord',
       logo: '/images/shipping/logo-postnord-round-30.svg',
       url: 'https://www.postnord.no/',
-      description: 'Spor din ordre med PostNord'
+      description: t('trackWithPostNord')
     },
     {
       name: 'Helthjem',
       logo: '/images/shipping/helthjem.png',
       url: 'https://www.helthjem.no/sporing',
-      description: 'Spor din ordre med Helthjem'
+      description: t('trackWithHelthjem')
     }
   ];
 
@@ -113,7 +113,7 @@ export default function SporOrdre() {
                 color: 'primary.main'
               }}>
                 <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                  Spor ordre →
+                  {t('trackOrderAction')}
                 </Typography>
               </Box>
             </Box>
@@ -124,17 +124,17 @@ export default function SporOrdre() {
       {/* Additional Info */}
       <Box sx={{ mt: 6, p: 3, backgroundColor: 'grey.50', borderRadius: 2 }}>
         <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
-          Trenger du hjelp?
+          {t('needHelp')}
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-          Hvis du ikke finner ordren din eller har andre spørsmål, kan du kontakte vår kundeservice.
+          {t('needHelpDescription')}
         </Typography>
         <Button 
           variant="outlined" 
           sx={{ mt: 1 }}
           onClick={() => window.location.href = 'mailto:post@gumbox.no'}
         >
-          Kontakt kundeservice
+          {t('contactCustomerService')}
         </Button>
       </Box>
     </Container>
