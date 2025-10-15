@@ -101,6 +101,22 @@ export default function AboutPage() {
           </Typography>
           
           <Typography 
+            variant="h6" 
+            sx={{ 
+              mb: 4, 
+              color: 'text.primary',
+              lineHeight: 1.7,
+              fontWeight: 400,
+              textAlign: 'left',
+              maxWidth: '900px',
+              mx: 'auto',
+              whiteSpace: 'pre-line'
+            }}
+          >
+            {t('aboutUsStory')}
+          </Typography>
+
+          <Typography 
             variant="h5" 
             sx={{ 
               mb: 4, 
@@ -110,6 +126,19 @@ export default function AboutPage() {
             }}
           >
             {t('aboutUsDescription')}
+          </Typography>
+
+          <Typography 
+            variant="h6" 
+            sx={{ 
+              mb: 5, 
+              color: '#F94F9B',
+              lineHeight: 1.6,
+              fontWeight: 500,
+              fontStyle: 'italic'
+            }}
+          >
+            {t('aboutUsThankYou')}
           </Typography>
 
           <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', justifyContent: 'center' }}>

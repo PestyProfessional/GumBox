@@ -11,7 +11,9 @@ export const translations = {
     
     // About Us Page
     welcomeToGumBox: 'Velkommen til GumBox',
+    aboutUsStory: 'GumBox ble til som en idé fra seriegründer Tobias, kjent for å ha skapt suksessen Lakrisgutta – selskapet som startet med gatesalg fra en campingvogn og endte opp som en del av Orkla Confectionery & Snacks Norge. Etter salget lå veien åpen for nye prosjekter, og denne gangen var det en gammel barndomsfølelse som skulle stå i sentrum: tyggegummi.\n\nIdeen bak GumBox er enkel, men sterk: å gjenskape den nostalgiske følelsen av å tygge tyggegummi fra barndommen, kombinert med opplevelsen av å åpne et kinderegg – fullt av overraskelser, smaker og minner. Hver boks inneholder tyggegummi fra hele verden, med en blanding av ikoniske klassikere og nye, spennende smaker som utfordrer fantasien.',
     aboutUsDescription: 'Vi er lidenskapelige tyggegummi-entusiaster som har gjort det til vårt oppdrag å bringe de mest eksotiske og deilige smakene fra hele verden rett til døren din.',
+    aboutUsThankYou: 'Takk for at du besøker siden vår! Enten du bare liker det du ser eller allerede har bestilt, setter vi stor pris på at du vil være med på å dele denne fantastiske visjonen med oss.',
     learnMore: 'Lær Mer',
     
     // Plan Selection
@@ -97,7 +99,9 @@ export const translations = {
     
     // About Us Page
     welcomeToGumBox: 'Welcome to GumBox',
+    aboutUsStory: 'GumBox was born as an idea from serial entrepreneur Tobias, known for creating the success story Lakrisgutta – the company that started with street sales from a caravan and ended up as part of Orkla Confectionery & Snacks Norge. After the sale, the path was open for new projects, and this time it was an old childhood feeling that would take center stage: chewing gum.\n\nThe idea behind GumBox is simple, but powerful: to recreate the nostalgic feeling of chewing gum from childhood, combined with the experience of opening a Kinder egg – full of surprises, flavors and memories. Each box contains chewing gum from around the world, with a mix of iconic classics and new, exciting flavors that challenge the imagination.',
     aboutUsDescription: 'We are passionate chewing gum enthusiasts who have made it our mission to bring the most exotic and delicious flavors from around the world right to your door.',
+    aboutUsThankYou: 'Thank you for visiting our page! Whether you just like what you see or have already ordered something, we greatly appreciate that you want to share this wonderful vision with us.',
     learnMore: 'Learn More',
     
     // Plan Selection
