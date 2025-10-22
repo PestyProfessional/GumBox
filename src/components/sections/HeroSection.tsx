@@ -7,9 +7,9 @@ import Image from 'next/image';
 import { ArrowForward as ArrowForwardIcon, PlayArrow as PlayArrowIcon, Star as StarIcon } from '@mui/icons-material';
 import { useTranslation } from '@/hooks/useTranslation';
 
-const MotionBox = motion(Box);
-const MotionTypography = motion(Typography);
-const MotionButton = motion(Button);
+const MotionBox = motion.create(Box);
+const MotionTypography = motion.create(Typography);
+const MotionButton = motion.create(Button);
 
 export default function HeroSection() {
   const { t } = useTranslation();

@@ -10,6 +10,7 @@ import GoogleAnalytics from '@/components/GoogleAnalytics';
 import FacebookPixel from '@/components/FacebookPixel';
 import Hotjar from '@/components/Hotjar';
 import Analytics from '@/components/Analytics';
+import StructuredData from '@/components/SEO/StructuredData';
 import './globals.css';
 
 const rubik = Rubik({
@@ -25,13 +26,22 @@ const rubik = Rubik({
 export const metadata: Metadata = {
   metadataBase: new URL('https://gumbox.no'),
   title: {
-    default: 'GumBox - Norges Beste Tyggegummi Abonnement',
+    default: 'GumBox - Global Chewing Gum Subscription | Monthly Exotic Flavors Worldwide',
     template: '%s | GumBox'
   },
-  description: 'Opplev eksotiske smaker fra hele verden med GumBox. Kurerte tyggegummi fra Japan, USA, Brasil og mer levert til døren din hver måned. Gratis frakt og avbryt når som helst.',
+  description: 'Discover exotic chewing gum flavors from around the world with GumBox. Monthly subscription box featuring unique gums from Japan, USA, Brazil & more. International shipping available. Cancel anytime.',
   applicationName: 'GumBox',
   referrer: 'origin-when-cross-origin',
-  keywords: ['tyggegummi', 'abonnement', 'norge', 'gumbox', 'eksotisk', 'smaker', 'månedlig', 'kurert', 'subscription box', 'candy', 'gum', 'norsk', 'levering', 'chewing gum subscription norway', 'monthly box', 'norwegian subscription service', 'exotic flavors', 'worldwide gum', 'monthly delivery', 'norwegian ecommerce'],
+  keywords: [
+    // Global English Keywords
+    'chewing gum subscription', 'monthly gum box', 'exotic gum flavors', 'international candy subscription', 'worldwide gum delivery', 'unique chewing gum', 'subscription box service', 'monthly candy box', 'gum subscription worldwide', 'exotic candy monthly', 'international gum subscription', 'monthly flavor box', 'world gum flavors', 'gum delivery service', 'subscription gum box',
+    // Nordic/European Keywords  
+    'tyggegummi abonnement', 'månedlig godteriboks', 'eksotiske smaker', 'skandinavisk abonnement', 'europeisk godteri', 'nordisk subscription',
+    // Regional Variations
+    'chewing gum subscription uk', 'gum box canada', 'subscription box australia', 'monthly gum usa', 'european candy box', 'asian gum flavors',
+    // Brand & Service Keywords
+    'gumbox', 'monthly subscription', 'cancel anytime', 'international shipping', 'curated gum selection', 'premium gum box'
+  ],
   authors: [{ name: 'GumBox Team', url: 'https://gumbox.no' }],
   creator: 'GumBox',
   publisher: 'GumBox Norge AS',
@@ -45,8 +55,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     siteName: 'GumBox',
-    title: 'GumBox - Norges Beste Tyggegummi Abonnement',
-    description: 'Opplev eksotiske smaker fra hele verden med GumBox. Kurerte tyggegummi fra Japan, USA, Brasil og mer levert til døren din hver måned. Gratis frakt og avbryt når som helst.',
+    title: 'GumBox - Global Chewing Gum Subscription | Monthly Exotic Flavors',
+    description: 'Discover exotic chewing gum flavors from around the world with GumBox. Monthly subscription featuring unique gums from Japan, USA, Brazil & more. International shipping available.',
     url: 'https://gumbox.no',
     locale: 'nb_NO',
     alternateLocale: ['en_US', 'da_DK', 'sv_SE'],
@@ -72,8 +82,8 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@gumboxno',
     creator: '@gumboxno',
-    title: 'GumBox - Norges Beste Tyggegummi Abonnement',
-    description: 'Opplev eksotiske smaker fra hele verden med GumBox. Kurerte tyggegummi levert månedlig. 🍬',
+    title: 'GumBox - Global Chewing Gum Subscription',
+    description: 'Discover exotic chewing gum flavors from around the world. Monthly subscription box with international shipping. 🌍🍬',
     images: [
       {
         url: '/images/ComputerHeroImageGul.png',
@@ -160,6 +170,7 @@ export default function RootLayout({
         <FacebookPixel />
         <Hotjar />
         <Analytics />
+        <StructuredData type="homepage" />
         <ThemeProviderWrapper>
           <LanguageProvider>
             <CartProvider>

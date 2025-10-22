@@ -42,8 +42,8 @@ import { useCart } from '@/contexts/CartContext';
 import PaymentMethodSelector from './PaymentMethodSelector';
 import { PaymentMethod } from '@/lib/payments';
 
-const MotionCard = motion(Card);
-const MotionButton = motion(Button);
+const MotionCard = motion.create(Card);
+const MotionButton = motion.create(Button);
 
 interface OrderItem {
   id: string;
@@ -61,8 +61,8 @@ export default function CheckoutInterface({
   onSubmit 
 }: CheckoutInterfaceProps) {
   const { state: cartState, removeItem } = useCart();
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('klarna');
-  const [shippingMethod, setShippingMethod] = useState('postnord');
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('vipps');
+  const [shippingMethod, setShippingMethod] = useState('posten');
   const [saveInfo, setSaveInfo] = useState(false);
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(true);
@@ -94,24 +94,10 @@ export default function CheckoutInterface({
   const subtotal = cartState.totalPrice; // VAT already included
   const shippingOptions = [
     {
-      id: 'postnord',
-      name: 'PostNord - Pakke i postkassen',
-      description: '3-6 business days',
-      price: 69.00,
-      icon: '/images/shipping/logo-postnord-round-30.svg'
-    },
-    {
-      id: 'helthjem',
-      name: 'Helthjem - Hjemlevering',
-      description: '3-6 business days',
-      price: 82.00,
-      icon: '/images/shipping/helthjem.png'
-    },
-    {
       id: 'posten',
       name: 'Posten - Pakke i postkassen',
       description: '3-6 business days',
-      price: 25.00,
+      price: 58.00,
       icon: '/images/shipping/logo-posten-round-30.svg'
     }
   ];
@@ -312,115 +298,6 @@ export default function CheckoutInterface({
       {/* Right Column - Checkout Form */}
       <Box sx={{ flex: { xs: '1', md: '0 0 55%' } }}>
 
-          {/* Contact Information */}
-          <Box sx={{ mb: 3 }}>
-            <Typography variant="h6" sx={{ mb: 2, fontWeight: 'bold' }}>
-              Contact Information
-            </Typography>
-            
-            <Stack spacing={2}>
-              <TextField
-                fullWidth
-                label="Email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="abu-bampoye@outlook.com"
-                variant="outlined"
-                sx={{ 
-                  '& .MuiOutlinedInput-root': {
-                    borderRadius: '8px',
-                  }
-                }}
-              />
-              
-              <Box sx={{ display: 'flex', gap: 2 }}>
-                <TextField
-                  label="Fornavn"
-                  value={formData.firstName}
-                  onChange={(e) => handleInputChange('firstName', e.target.value)}
-                  variant="outlined"
-                  sx={{ 
-                    flex: 1,
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: '8px',
-                    }
-                  }}
-                />
-                
-                <TextField
-                  label="Etternavn"
-                  value={formData.lastName}
-                  onChange={(e) => handleInputChange('lastName', e.target.value)}
-                  variant="outlined"
-                  sx={{ 
-                    flex: 1,
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: '8px',
-                    }
-                  }}
-                />
-              </Box>
-              
-              <TextField
-                fullWidth
-                label="Mobilnummer"
-                value={formData.phone}
-                onChange={(e) => handleInputChange('phone', e.target.value)}
-                placeholder="+47 123 45 678"
-                variant="outlined"
-                sx={{ 
-                  '& .MuiOutlinedInput-root': {
-                    borderRadius: '8px',
-                  }
-                }}
-              />
-              
-              <TextField
-                fullWidth
-                label="Adresse"
-                value={formData.address}
-                onChange={(e) => handleInputChange('address', e.target.value)}
-                placeholder="Gateadresse 123"
-                variant="outlined"
-                sx={{ 
-                  '& .MuiOutlinedInput-root': {
-                    borderRadius: '8px',
-                  }
-                }}
-              />
-              
-              <Box sx={{ display: 'flex', gap: 2 }}>
-                <TextField
-                  label="Postnummer"
-                  value={formData.postalCode}
-                  onChange={(e) => handleInputChange('postalCode', e.target.value)}
-                  placeholder="0123"
-                  variant="outlined"
-                  sx={{ 
-                    flex: 1,
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: '8px',
-                    }
-                  }}
-                />
-                
-                <TextField
-                  label="Poststed"
-                  value={formData.city}
-                  onChange={(e) => handleInputChange('city', e.target.value)}
-                  placeholder="Oslo"
-                  variant="outlined"
-                  sx={{ 
-                    flex: 2,
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: '8px',
-                    }
-                  }}
-                />
-              </Box>
-            </Stack>
-          </Box>
 
           {/* Shipping Method */}
           <Box sx={{ mb: 3 }}>
@@ -509,24 +386,9 @@ export default function CheckoutInterface({
               <Stack spacing={1}>
                 {[
                   { 
-                    id: 'klarna', 
-                    label: 'Klarna', 
-                    logo: '/images/CheckOut/klarna-531cd07130cfad7de4c678ef467cbeb7.svg' 
-                  },
-                  { 
                     id: 'vipps', 
                     label: 'Vipps', 
                     logo: '/images/CheckOut/Vipps logo.svg' 
-                  },
-                  { 
-                    id: 'stripe', 
-                    label: 'Card', 
-                    logo: '/images/CheckOut/card-ce24697297bd3c6a00fdd2fb6f760f0d.svg',
-                    cardLogos: [
-                      '/images/CheckOut/visa-729c05c240c4bdb47b03ac81d9945bfe.svg',
-                      '/images/CheckOut/mastercard-4d8844094130711885b5e41b28c9848f.svg',
-                      '/images/CheckOut/amex-a49b82f46c5cd6a96a6e418a6ca1717c.svg'
-                    ]
                   }
                 ].map((method) => {
                   const isSelected = paymentMethod === method.id;
@@ -588,74 +450,6 @@ export default function CheckoutInterface({
             </RadioGroup>
           </Box>
 
-          {/* Card Form - Show only when Card is selected */}
-          {paymentMethod === 'stripe' && (
-            <Box sx={{ mb: 3, p: 3, border: '1px solid', borderColor: 'grey.300', borderRadius: '8px', backgroundColor: 'grey.50' }}>
-              <Typography variant="h6" sx={{ mb: 2, fontWeight: 'bold' }}>
-                Card Information
-              </Typography>
-              
-              <Stack spacing={2}>
-                <TextField
-                  fullWidth
-                  label="Card Number"
-                  value={cardData.cardNumber}
-                  onChange={(e) => handleCardInputChange('cardNumber', e.target.value)}
-                  placeholder="1234 5678 9012 3456"
-                  variant="outlined"
-                  sx={{ 
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: '8px',
-                    }
-                  }}
-                />
-                
-                <Box sx={{ display: 'flex', gap: 2 }}>
-                  <TextField
-                    label="MM/YY"
-                    value={cardData.expiryDate}
-                    onChange={(e) => handleCardInputChange('expiryDate', e.target.value)}
-                    placeholder="12/25"
-                    variant="outlined"
-                    sx={{ 
-                      flex: 1,
-                      '& .MuiOutlinedInput-root': {
-                        borderRadius: '8px',
-                      }
-                    }}
-                  />
-                  
-                  <TextField
-                    label="CVV"
-                    value={cardData.cvv}
-                    onChange={(e) => handleCardInputChange('cvv', e.target.value)}
-                    placeholder="123"
-                    variant="outlined"
-                    sx={{ 
-                      flex: 1,
-                      '& .MuiOutlinedInput-root': {
-                        borderRadius: '8px',
-                      }
-                    }}
-                  />
-                </Box>
-                
-                <TextField
-                  fullWidth
-                  label="Cardholder Name"
-                  value={cardData.cardholderName}
-                  onChange={(e) => handleCardInputChange('cardholderName', e.target.value)}
-                  placeholder="John Doe"
-                  variant="outlined"
-                  sx={{ 
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: '8px',
-                    }
-                  }}
-                />
-              </Stack>
-            </Box>
-          )}
 
           {/* Save Info Checkbox */}
           <FormGroup sx={{ mb: 3 }}>

@@ -6,8 +6,8 @@ import { useInView } from 'framer-motion';
 import { useRef, useEffect } from 'react';
 import { GumIcon } from '@/components/icons/NorwayIcons';
 
-const MotionCard = motion(Card);
-const MotionBox = motion(Box);
+const MotionCard = motion.create(Card);
+const MotionBox = motion.create(Box);
 
 interface ProductItem {
   id: string;
@@ -395,7 +395,7 @@ export default function ProductShowcase() {
         {/* Products Grid */}
         <Grid container spacing={3}>
           {products.map((product, index) => (
-            <Grid item xs={12} sm={6} md={4} key={product.id}>
+            <Grid size={{ xs: {12} sm={6} md={4} key={product.id} }}>
               <ProductCard {...product} index={index} />
             </Grid>
           ))}

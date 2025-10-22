@@ -7,9 +7,9 @@ import TrustBadgesSection from '@/components/sections/TrustBadgesSection';
 import ProductShowcase from '@/components/sections/ProductShowcase';
 import ReviewsSection from '@/components/sections/ReviewsSection';
 
-const MotionBox = motion(Box);
-const MotionCard = motion(Card);
-const MotionTypography = motion(Typography);
+const MotionBox = motion.create(Box);
+const MotionCard = motion.create(Card);
+const MotionTypography = motion.create(Typography);
 
 const teamMembers = [
   {
@@ -77,7 +77,7 @@ export default function AboutUsSection() {
       <Container maxWidth="lg" sx={{ py: { xs: 8, md: 12 } }}>
         <Grid container spacing={6} alignItems="center">
           {/* Left Content */}
-          <Grid item xs={12} lg={6}>
+          <Grid size={{ xs: 12, lg: 6 }}>
             <MotionBox
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -170,7 +170,7 @@ export default function AboutUsSection() {
           </Grid>
 
           {/* Right Image */}
-          <Grid item xs={12} lg={6}>
+          <Grid size={{ xs: 12, lg: 6 }}>
             <MotionBox
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -246,7 +246,7 @@ export default function AboutUsSection() {
         >
           <Grid container spacing={4}>
             {stats.map((stat, index) => (
-              <Grid item xs={6} md={3} key={index}>
+              <Grid size={{ xs: 6, md: 3 >>
                 <MotionBox
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -316,7 +316,7 @@ export default function AboutUsSection() {
             {values.map((value, index) => {
               const IconComponent = value.icon;
               return (
-                <Grid item xs={12} md={4} key={index}>
+                <Grid size={{ xs: 12, md: 4 >>
                   <MotionCard
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -387,7 +387,7 @@ export default function AboutUsSection() {
           
           <Grid container spacing={4} justifyContent="center">
             {teamMembers.map((member, index) => (
-              <Grid item xs={12} sm={6} md={4} key={index}>
+              <Grid size={{ xs: {12} sm={6} md={4} key={index} }}>
                 <MotionCard
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}

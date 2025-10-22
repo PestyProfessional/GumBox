@@ -8,9 +8,9 @@ import { ArrowBackIos, ArrowForwardIos, Star } from '@mui/icons-material';
 import { useCart } from '@/contexts/CartContext';
 import { useTranslation } from '@/hooks/useTranslation';
 
-const MotionBox = motion(Box);
-const MotionCard = motion(Card);
-const MotionButton = motion(Button);
+const MotionBox = motion.create(Box);
+const MotionCard = motion.create(Card);
+const MotionButton = motion.create(Button);
 
 // Sample product data
 const productImages = [
@@ -118,24 +118,13 @@ export default function ProductSubscriptionSection() {
       <Container maxWidth="xl">
         <Grid container spacing={{ xs: 3, md: 4, lg: 6 }} alignItems="flex-start" sx={{ minHeight: '600px' }}>
           {/* Left side - Product showcase */}
-          <Grid item xs={12} lg={6}>
+          <Grid size={{ xs: 12, lg: 6 }}>
             <MotionBox
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6 }}
             >
-              <Typography
-                variant="h6"
-                sx={{
-                  color: '#1A1A1A',
-                  fontWeight: 400,
-                  mb: 2,
-                  fontSize: { xs: '1rem', md: '1.1rem' },
-                }}
-              >
-                05
-              </Typography>
 
               {/* Main product image */}
               <MotionCard
@@ -218,34 +207,6 @@ export default function ProductSubscriptionSection() {
                       />
                     </Button>
 
-                    {/* Image counter */}
-                    <Box
-                      sx={{
-                        backgroundColor: 'white',
-                        borderRadius: '20px',
-                        px: 2.5,
-                        py: 0.75,
-                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-                        mx: 1,
-                        minWidth: 50,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }}
-                    >
-                      <Typography
-                        sx={{
-                          fontSize: '0.8rem',
-                          fontWeight: 600,
-                          color: '#1A1A1A',
-                          lineHeight: 1,
-                          whiteSpace: 'nowrap',
-                          fontFamily: 'monospace',
-                        }}
-                      >
-                        {currentImageIndex + 1} / {productImages.length}
-                      </Typography>
-                    </Box>
 
                     {/* Right arrow */}
                     <Button
@@ -326,7 +287,7 @@ export default function ProductSubscriptionSection() {
           </Grid>
 
           {/* Right side - Subscription plans */}
-          <Grid item xs={12} lg={6}>
+          <Grid size={{ xs: 12, lg: 6 }}>
             <MotionBox
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}

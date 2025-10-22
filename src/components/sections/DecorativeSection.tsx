@@ -4,8 +4,8 @@ import { Box, Container, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-const MotionBox = motion(Box);
-const MotionButton = motion(Button);
+const MotionBox = motion.create(Box);
+const MotionButton = motion.create(Button);
 
 export default function DecorativeSection() {
   return (

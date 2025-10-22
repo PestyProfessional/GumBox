@@ -15,18 +15,6 @@ export default function SporOrdre() {
       logo: '/images/shipping/logo-posten-round-30.svg',
       url: 'https://www.posten.no/sporing-kundeservice',
       description: t('trackWithPosten')
-    },
-    {
-      name: 'PostNord',
-      logo: '/images/shipping/logo-postnord-round-30.svg',
-      url: 'https://www.postnord.no/',
-      description: t('trackWithPostNord')
-    },
-    {
-      name: 'Helthjem',
-      logo: '/images/shipping/helthjem.png',
-      url: 'https://www.helthjem.no/sporing',
-      description: t('trackWithHelthjem')
     }
   ];
 
