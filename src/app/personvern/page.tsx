@@ -157,10 +157,10 @@ export default function PersonvernPage() {
         
         {/* Section 1 */}
         <Typography variant="h4" component="h2">
-          {privacyContent.section1.title}
+          {(privacyContent as any).section1.title}
         </Typography>
         
-        {Object.entries(privacyContent.section1.subsections).map(([key, subsection]: [string, any]) => (
+        {Object.entries((privacyContent as any).section1.subsections).map(([key, subsection]: [string, any]) => (
           <Box key={key}>
             <Typography variant="h5" component="h3">
               {subsection.title}
@@ -182,118 +182,118 @@ export default function PersonvernPage() {
 
         {/* Section 2 */}
         <Typography variant="h4" component="h2">
-          {privacyContent.section2.title}
+          {(privacyContent as any).section2.title}
         </Typography>
         <Typography variant="body1">
-          {privacyContent.section2.content}
+          {(privacyContent as any).section2.content}
         </Typography>
 
         {/* Section 3 */}
         <Typography variant="h4" component="h2">
-          {privacyContent.section3.title}
+          {(privacyContent as any).section3.title}
         </Typography>
         
         <Typography variant="body1" sx={{ mb: 3 }}>
-          {privacyContent.section3.intro}
+          {(privacyContent as any).section3.intro}
         </Typography>
 
-        {renderDataTable(privacyContent.section3.tableData, privacyContent.section3.tableHeaders)}
+        {renderDataTable((privacyContent as any).section3.tableData, (privacyContent as any).section3.tableHeaders)}
 
         {/* Section 4 */}
         <Typography variant="h4" component="h2">
-          {privacyContent.section4.title}
+          {(privacyContent as any).section4.title}
         </Typography>
         
         <Typography variant="body1">
-          {privacyContent.section4.intro}
+          {(privacyContent as any).section4.intro}
         </Typography>
 
         <Typography variant="h5" component="h3">
-          {privacyContent.section4.subtitle}
+          {(privacyContent as any).section4.subtitle}
         </Typography>
         
-        {renderProcessorsTable(privacyContent.section4.processors, privacyContent.section4.tableHeaders)}
+        {renderProcessorsTable((privacyContent as any).section4.processors, (privacyContent as any).section4.tableHeaders)}
 
         {/* Section 5 */}
         <Typography variant="h4" component="h2">
-          {privacyContent.section5.title}
+          {(privacyContent as any).section5.title}
         </Typography>
         <Typography variant="body1">
-          {privacyContent.section5.content}
+          {(privacyContent as any).section5.content}
         </Typography>
 
         {/* Section 6 */}
         <Typography variant="h4" component="h2">
-          {privacyContent.section6.title}
+          {(privacyContent as any).section6.title}
         </Typography>
         
         <Typography variant="h5" component="h3">
-          {privacyContent.section6.subtitle}
+          {(privacyContent as any).section6.subtitle}
         </Typography>
         <Typography variant="body1">
-          {privacyContent.section6.intro}
+          {(privacyContent as any).section6.intro}
         </Typography>
-        {renderRetentionPeriods(privacyContent.section6.retentionPeriods)}
+        {renderRetentionPeriods((privacyContent as any).section6.retentionPeriods)}
 
         {/* Section 7 */}
         <Typography variant="h4" component="h2">
-          {privacyContent.section7.title}
+          {(privacyContent as any).section7.title}
         </Typography>
         <Typography variant="body1">
-          {privacyContent.section7.intro}
+          {(privacyContent as any).section7.intro}
         </Typography>
-        {renderList(privacyContent.section7.measures)}
+        {renderList((privacyContent as any).section7.measures)}
 
         {/* Section 8 */}
         <Typography variant="h4" component="h2">
-          {privacyContent.section8.title}
+          {(privacyContent as any).section8.title}
         </Typography>
         <Typography variant="body1">
-          {privacyContent.section8.content}
+          {(privacyContent as any).section8.content}
         </Typography>
 
         {/* Section 9 */}
         <Typography variant="h4" component="h2">
-          {privacyContent.section9.title}
+          {(privacyContent as any).section9.title}
         </Typography>
         <Typography variant="body1">
-          {privacyContent.section9.intro}
+          {(privacyContent as any).section9.intro}
         </Typography>
-        {renderRights(privacyContent.section9.rights)}
+        {renderRights((privacyContent as any).section9.rights)}
 
         <Typography variant="h5" component="h3">
-          {privacyContent.section9.exercise.title}
+          {(privacyContent as any).section9.exercise.title}
         </Typography>
         <Typography variant="body1">
-          {privacyContent.section9.exercise.content}
+          {(privacyContent as any).section9.exercise.content}
         </Typography>
 
         <Typography variant="h5" component="h3">
-          {privacyContent.section9.complaint.title}
+          {(privacyContent as any).section9.complaint.title}
         </Typography>
         <Typography variant="body1">
-          {privacyContent.section9.complaint.content}
+          {(privacyContent as any).section9.complaint.content}
         </Typography>
 
         {/* Section 10 */}
         <Typography variant="h4" component="h2">
-          {privacyContent.section10.title}
+          {(privacyContent as any).section10.title}
         </Typography>
         <Typography variant="body1">
-          {privacyContent.section10.content}
+          {(privacyContent as any).section10.content}
         </Typography>
 
         {/* Section 11 */}
         <Typography variant="h4" component="h2">
-          {privacyContent.section11.title}
+          {(privacyContent as any).section11.title}
         </Typography>
         <Typography variant="body1">
-          {privacyContent.section11.intro}
+          {(privacyContent as any).section11.intro}
         </Typography>
         <Box sx={{ mt: 2, p: 3, backgroundColor: 'grey.50', borderRadius: 2 }}>
-          <Typography variant="body1"><strong>E-post:</strong> {privacyContent.section11.contact.email}</Typography>
-          <Typography variant="body1"><strong>Telefon:</strong> {privacyContent.section11.contact.phone}</Typography>
-          <Typography variant="body1"><strong>Adresse:</strong> {privacyContent.section11.contact.address}</Typography>
+          <Typography variant="body1"><strong>E-post:</strong> {(privacyContent as any).section11.contact.email}</Typography>
+          <Typography variant="body1"><strong>Telefon:</strong> {(privacyContent as any).section11.contact.phone}</Typography>
+          <Typography variant="body1"><strong>Adresse:</strong> {(privacyContent as any).section11.contact.address}</Typography>
         </Box>
 
         {/* Last updated */}

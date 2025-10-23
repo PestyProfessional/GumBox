@@ -15,7 +15,7 @@ import { useRouter } from 'next/navigation';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useTranslation } from '@/hooks/useTranslation';
-import { faqContent, FAQItem } from '@/lib/faqContent';
+import { faqContent, FAQItem as FAQContentItem } from '@/lib/faqContent';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface FAQItem {

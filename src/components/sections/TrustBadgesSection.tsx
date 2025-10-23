@@ -192,7 +192,7 @@ export default function TrustBadgesSection() {
         {/* Trust badges grid */}
         <Grid container spacing={{ xs: 2, md: 4 }}>
           {trustBadges.map((badge, index) => (
-            <Grid size={{ xs: {12} sm={6} md={3} key={badge.title} }}>
+            <Grid size={{ xs: 12, sm: 6, md: 3 }} key={badge.title}>
               <TrustBadge
                 icon={badge.icon}
                 title={badge.title}

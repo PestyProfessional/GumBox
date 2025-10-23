@@ -246,7 +246,7 @@ export default function AboutUsSection() {
         >
           <Grid container spacing={4}>
             {stats.map((stat, index) => (
-              <Grid size={{ xs: 6, md: 3 >>
+              <Grid size={{ xs: 6, md: 3 }} key={index}>
                 <MotionBox
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -316,7 +316,7 @@ export default function AboutUsSection() {
             {values.map((value, index) => {
               const IconComponent = value.icon;
               return (
-                <Grid size={{ xs: 12, md: 4 >>
+                <Grid size={{ xs: 12, md: 4 }} key={index}>
                   <MotionCard
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -387,7 +387,7 @@ export default function AboutUsSection() {
           
           <Grid container spacing={4} justifyContent="center">
             {teamMembers.map((member, index) => (
-              <Grid size={{ xs: {12} sm={6} md={4} key={index} }}>
+              <Grid size={{ xs: 12, sm: 6, md: 4 }} key={index}>
                 <MotionCard
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}

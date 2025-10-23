@@ -89,7 +89,7 @@ export default function TermsOfService() {
       </Box>
 
       <Paper elevation={0} sx={{ p: 4, border: '1px solid', borderColor: 'divider' }}>
-        {termsContent.sections.map((section: any, sectionIndex: number) => (
+        {(termsContent as { sections: any[] }).sections.map((section: any, sectionIndex: number) => (
           <Box key={sectionIndex}>
             {/* Section Title */}
             <Typography variant="h5" sx={{ mb: 3, fontWeight: 600, color: 'primary.main' }}>
@@ -117,7 +117,7 @@ export default function TermsOfService() {
             ))}
 
             {/* Divider between sections (except last) */}
-            {sectionIndex < termsContent.sections.length - 1 && (
+            {sectionIndex < (termsContent as { sections: any[] }).sections.length - 1 && (
               <Divider sx={{ my: 4 }} />
             )}
           </Box>

@@ -118,25 +118,25 @@ export default function CookiesPage() {
         </Typography>
         
         <Typography variant="body1" color="text.secondary" sx={{ mb: 4, lineHeight: 1.6 }}>
-          {cookiesContent.introduction}
+          {(cookiesContent as any).introduction}
         </Typography>
       </Box>
 
       {/* What are cookies */}
       <Box sx={{ mb: 6 }}>
         <Typography variant="h4" sx={{ mb: 3, fontWeight: 600 }}>
-          {cookiesContent.sections.whatAreCookies.title}
+          {(cookiesContent as any).sections.whatAreCookies.title}
         </Typography>
-        {renderContent(cookiesContent.sections.whatAreCookies.content)}
+        {renderContent((cookiesContent as any).sections.whatAreCookies.content)}
       </Box>
 
       {/* Types of cookies */}
       <Box sx={{ mb: 6 }}>
         <Typography variant="h4" sx={{ mb: 3, fontWeight: 600 }}>
-          {cookiesContent.sections.cookieTypes.title}
+          {(cookiesContent as any).sections.cookieTypes.title}
         </Typography>
         
-        {Object.entries(cookiesContent.sections.cookieTypes.categories).map(([type, category]: [string, any]) => (
+        {Object.entries((cookiesContent as any).sections.cookieTypes.categories).map(([type, category]: [string, any]) => (
           <Accordion
             key={type}
             expanded={expanded === type}
@@ -171,10 +171,10 @@ export default function CookiesPage() {
       {/* Third party services */}
       <Box sx={{ mb: 6 }}>
         <Typography variant="h4" sx={{ mb: 3, fontWeight: 600 }}>
-          {cookiesContent.sections.thirdPartyServices.title}
+          {(cookiesContent as any).sections.thirdPartyServices.title}
         </Typography>
         
-        {Object.values(cookiesContent.sections.thirdPartyServices.services).map((service: any, index) => (
+        {Object.values((cookiesContent as any).sections.thirdPartyServices.services).map((service: any, index) => (
           <div key={index}>
             {renderThirdPartyService(service)}
           </div>
@@ -184,27 +184,27 @@ export default function CookiesPage() {
       {/* How to control cookies */}
       <Box sx={{ mb: 6 }}>
         <Typography variant="h4" sx={{ mb: 3, fontWeight: 600 }}>
-          {cookiesContent.sections.cookieControl.title}
+          {(cookiesContent as any).sections.cookieControl.title}
         </Typography>
         
         <Typography variant="body1" sx={{ mb: 3, lineHeight: 1.6 }}>
-          {cookiesContent.sections.cookieControl.intro}
+          {(cookiesContent as any).sections.cookieControl.intro}
         </Typography>
 
         <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
-          {cookiesContent.sections.cookieControl.consentBanner.title}
+          {(cookiesContent as any).sections.cookieControl.consentBanner.title}
         </Typography>
         <Typography variant="body1" sx={{ mb: 3, lineHeight: 1.6 }}>
-          {cookiesContent.sections.cookieControl.consentBanner.description}
+          {(cookiesContent as any).sections.cookieControl.consentBanner.description}
         </Typography>
 
         <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
-          {cookiesContent.sections.cookieControl.browserSettings.title}
+          {(cookiesContent as any).sections.cookieControl.browserSettings.title}
         </Typography>
         <Typography variant="body1" sx={{ mb: 2, lineHeight: 1.6 }}>
-          {cookiesContent.sections.cookieControl.browserSettings.intro}
+          {(cookiesContent as any).sections.cookieControl.browserSettings.intro}
         </Typography>
-        {renderList(cookiesContent.sections.cookieControl.browserSettings.options)}
+        {renderList((cookiesContent as any).sections.cookieControl.browserSettings.options)}
       </Box>
 
       {/* Contact section */}
@@ -215,17 +215,17 @@ export default function CookiesPage() {
         textAlign: 'center'
       }}>
         <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
-          {cookiesContent.sections.contact.title}
+          {(cookiesContent as any).sections.contact.title}
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-          {cookiesContent.sections.contact.description}
+          {(cookiesContent as any).sections.contact.description}
         </Typography>
         <Button 
           variant="contained" 
           size="large"
           onClick={() => window.location.href = 'mailto:post@gumbox.no'}
         >
-          {cookiesContent.sections.contact.buttonText}
+          {(cookiesContent as any).sections.contact.buttonText}
         </Button>
       </Box>
     </Container>

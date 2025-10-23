@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Static export for Azure Static Web Apps
+  output: 'export',
+  trailingSlash: true,
+  skipTrailingSlashRedirect: true,
+  
   // SEO and Performance Optimizations
   images: {
     formats: ['image/webp', 'image/avif'],
@@ -13,48 +18,12 @@ const nextConfig = {
   
   // Compression for better loading speeds
   compress: true,
-  
-  // PWA optimizations
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY',
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin',
-          },
-        ],
-      },
-      // Cache static assets
-      {
-        source: '/images/(.*)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=86400, stale-while-revalidate=86400',
-          },
-        ],
-      },
-    ];
-  },
 
   // Generate static sitemap and robots.txt at build time
   experimental: {
     optimizeCss: true,
     optimizePackageImports: ['@mui/material', '@mui/icons-material'],
   },
-
-  // SEO-friendly trailing slashes
-  trailingSlash: false,
 
   // Enable bundle analyzer for performance monitoring
   ...(process.env.ANALYZE === 'true' && {

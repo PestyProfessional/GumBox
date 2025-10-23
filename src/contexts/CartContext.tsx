@@ -4,14 +4,18 @@ import React, { createContext, useContext, useReducer, useEffect } from 'react';
 
 export interface CartItem {
   id: string;
-  productId: string;
+  productId: string; // GumBox ID
   productName: string;
   productImage: string;
-  planId: string;
+  planId: string; // For subscription plans (1-month, 3-month, 6-month)
   planName: string;
   planDuration: number; // months
   price: number;
   quantity: number;
+  // Additional properties from the API
+  theme?: string;
+  country?: string;
+  flag?: string;
 }
 
 interface CartState {
