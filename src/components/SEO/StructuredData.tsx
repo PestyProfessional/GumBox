@@ -16,8 +16,8 @@ interface StructuredDataProps {
 export default function StructuredData({ type = 'homepage', productData }: StructuredDataProps) {
   // Organization Schema - Always included
   const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
+    "@context": "https://schema.org" as const,
+    "@type": "Organization" as const,
     "name": "GumBox",
     "alternateName": ["GumBox Norway", "GumBox AS"],
     "url": "https://gumbox.no",
@@ -74,8 +74,8 @@ export default function StructuredData({ type = 'homepage', productData }: Struc
 
   // Website Schema
   const websiteSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
+    "@context": "https://schema.org" as const,
+    "@type": "WebSite" as const,
     "name": "GumBox - Global Chewing Gum Subscription",
     "alternateName": "GumBox",
     "url": "https://gumbox.no",
@@ -97,8 +97,8 @@ export default function StructuredData({ type = 'homepage', productData }: Struc
 
   // Service Schema for Subscription Business
   const serviceSchema = {
-    "@context": "https://schema.org",
-    "@type": "Service",
+    "@context": "https://schema.org" as const,
+    "@type": "Service" as const,
     "name": "Monthly Chewing Gum Subscription",
     "description": "International monthly subscription service delivering curated exotic chewing gum flavors from Japan, USA, Brazil, Europe and more worldwide destinations.",
     "provider": {
@@ -152,22 +152,22 @@ export default function StructuredData({ type = 'homepage', productData }: Struc
 
   // Product Schema (for product pages)
   const productSchema = productData ? {
-    "@context": "https://schema.org",
-    "@type": "Product",
+    "@context": "https://schema.org" as const,
+    "@type": "Product" as const,
     "name": productData.name,
     "description": productData.description,
     "image": productData.image,
     "brand": {
-      "@type": "Brand",
+      "@type": "Brand" as const,
       "name": "GumBox"
     },
     "offers": {
-      "@type": "Offer",
+      "@type": "Offer" as const,
       "price": productData.price,
       "priceCurrency": productData.currency,
-      "availability": "https://schema.org/InStock",
+      "availability": "https://schema.org/InStock" as const,
       "seller": {
-        "@type": "Organization",
+        "@type": "Organization" as const,
         "name": "GumBox"
       }
     },
@@ -176,8 +176,8 @@ export default function StructuredData({ type = 'homepage', productData }: Struc
 
   // FAQ Schema for better search visibility
   const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
+    "@context": "https://schema.org" as const,
+    "@type": "FAQPage" as const,
     "mainEntity": [
       {
         "@type": "Question",

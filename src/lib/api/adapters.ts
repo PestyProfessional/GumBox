@@ -40,7 +40,7 @@ export function getCountryFlag(country: string): string {
 // Convert .NET API GumProduct to React frontend model
 export function adaptGumProduct(apiProduct: ApiGumProduct): GumProduct {
   // Find primary image or use first available
-  const primaryImage = apiProduct.Images?.find(img => img.IsPrimary) || apiProduct.Images?.[0];
+  const primaryImage = apiProduct.Images?.find((img: any) => img.IsPrimary) || apiProduct.Images?.[0];
 
   return {
     id: apiProduct.Id,
@@ -69,7 +69,7 @@ export function adaptGumBox(apiBox: ApiGumBox): GumBox {
   const price = pricing ? Math.round(pricing.FinalPrice) : 0;
 
   // Convert box contents
-  const contents: BoxContent[] = apiBox.Contents?.map(content => ({
+  const contents: BoxContent[] = apiBox.Contents?.map((content: any) => ({
     productId: content.GumProductId,
     quantity: content.Quantity,
     specialNote: content.SpecialNote || undefined

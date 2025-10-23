@@ -83,7 +83,7 @@ export default function DecorativeSection() {
               style={{
                 objectFit: 'contain',
                 objectPosition: 'center left',
-                imageRendering: 'optimizeQuality',
+                imageRendering: 'crisp-edges',
                 willChange: 'transform',
               }}
               priority

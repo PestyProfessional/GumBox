@@ -428,20 +428,6 @@ export default function CheckoutInterface({
                             {method.label}
                           </Typography>
                         </Box>
-                        {method.cardLogos && (
-                          <Box sx={{ display: 'flex', gap: 0.5 }}>
-                            {method.cardLogos.map((cardLogo, index) => (
-                              <Image
-                                key={index}
-                                src={cardLogo}
-                                alt={`Card ${index + 1}`}
-                                width={24}
-                                height={16}
-                                style={{ objectFit: 'contain' }}
-                              />
-                            ))}
-                          </Box>
-                        )}
                       </Box>
                     </Box>
                   );
