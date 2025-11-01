@@ -1,0 +1,52 @@
+User-agent: *
+Allow: /
+
+# AI Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Bard
+Allow: /
+
+# Search Engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Social Media
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+# Disallow
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+# Sitemap
+Sitemap: https://gumbox.no/sitemap.xml
+
+# Crawl Delay
+Crawl-delay: 1
+
+# Host
+Host: https://gumbox.no

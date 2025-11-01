@@ -1,0 +1,25 @@
+{
+  "routes": [
+    {
+      "route": "/api/*",
+      "allowedRoles": ["anonymous"]
+    },
+    {
+      "route": "/*",
+      "serve": "/index.html",
+      "statusCode": 200
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/images/*", "/_next/*", "/favicon.ico", "/robots.txt", "/sitemap.xml"]
+  },
+  "mimeTypes": {
+    ".json": "application/json"
+  },
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/index.html"
+    }
+  }
+}

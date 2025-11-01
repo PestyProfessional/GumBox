@@ -1,0 +1,60 @@
+{
+  "name": "GumBox - Norges Beste Tyggegummi Abonnement",
+  "short_name": "GumBox",
+  "description": "Opplev eksotiske smaker fra hele verden med GumBox. Kurerte tyggegummi levert månedlig.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#F94F9B",
+  "orientation": "portrait-primary",
+  "lang": "nb-NO",
+  "scope": "/",
+  "categories": ["food", "shopping", "lifestyle"],
+  "icons": [
+    {
+      "src": "/images/BlaaPerf.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/GulPerf.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/RosaPerf.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Velg Abonnement",
+      "short_name": "Abonnement",
+      "description": "Velg ditt GumBox abonnement",
+      "url": "/#plan-selection",
+      "icons": [
+        {
+          "src": "/images/BlaaPerf.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Om Oss",
+      "short_name": "Om Oss",
+      "description": "Lær mer om GumBox",
+      "url": "/om-oss",
+      "icons": [
+        {
+          "src": "/images/GulPerf.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "prefer_related_applications": false
+}
