@@ -40,6 +40,7 @@ import { useState, useEffect } from 'react';
 import { useCart } from '@/contexts/CartContext';
 import PaymentMethodSelector from './PaymentMethodSelector';
 import { PaymentMethod } from '@/lib/payments';
+import PostenAddressAutocomplete from '@/components/ui/PostenAddressAutocomplete';
 
 const MotionCard = motion.create(Card);
 const MotionButton = motion.create(Button);
@@ -65,6 +66,7 @@ export default function CheckoutInterface({
   const [saveInfo, setSaveInfo] = useState(false);
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [fullName, setFullName] = useState('');
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -361,37 +363,24 @@ export default function CheckoutInterface({
             <TextField
               fullWidth
               label=""
-              value={`${formData.firstName} ${formData.lastName}`.trim()}
+              value={fullName}
               onChange={(e) => {
-                const fullName = e.target.value;
-                // Allow multiple spaces and trim only leading/trailing spaces
-                const names = fullName.trim().split(/\s+/).filter(name => name.length > 0);
-                const firstName = names[0] || '';
-                const lastName = names.slice(1).join(' ') || '';
-                handleInputChange('firstName', firstName);
-                handleInputChange('lastName', lastName);
+                const value = e.target.value;
+                setFullName(value);
+                
+                // Update firstName and lastName in the background for form submission
+                const spaceIndex = value.indexOf(' ');
+                if (spaceIndex === -1) {
+                  setFormData(prev => ({ ...prev, firstName: value, lastName: '' }));
+                } else {
+                  const firstName = value.substring(0, spaceIndex);
+                  const lastName = value.substring(spaceIndex + 1);
+                  setFormData(prev => ({ ...prev, firstName, lastName }));
+                }
               }}
               variant="outlined"
               placeholder="Fornavn og etternavn"
-              multiline={false}
-              sx={{ 
-                mb: 2,
-                '& .MuiInputBase-input': {
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  // Ensure proper spacing on all devices
-                  letterSpacing: 'normal',
-                  wordSpacing: 'normal',
-                },
-                // Mobile-specific optimizations
-                '@media (max-width: 600px)': {
-                  '& .MuiInputBase-input': {
-                    fontSize: '16px', // Prevent zoom on iOS
-                    lineHeight: '1.5',
-                  }
-                }
-              }}
+              sx={{ mb: 2 }}
               inputProps={{
                 autoComplete: 'name',
                 spellCheck: false,
@@ -404,13 +393,19 @@ export default function CheckoutInterface({
               Adressen din
             </Typography>
             
-            <TextField
+            <PostenAddressAutocomplete
               fullWidth
               label=""
               value={formData.address}
-              onChange={(e) => handleInputChange('address', e.target.value)}
+              onChange={(value) => handleInputChange('address', value)}
+              onAddressSelect={(addressData) => {
+                // Auto-fill all address fields when user selects from autocomplete
+                handleInputChange('address', addressData.street);
+                handleInputChange('postalCode', addressData.postalCode);
+                handleInputChange('city', addressData.city);
+              }}
               variant="outlined"
-              placeholder="Gateadresse"
+              placeholder="Skriv adresse (minst 3 tegn)"
               sx={{ mb: 2 }}
             />
 
